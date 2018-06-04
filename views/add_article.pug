@@ -1,0 +1,23 @@
+extends layout
+
+block content
+  h1 #{title}
+  form(method='POST', action='/articles/add')
+    #form-group
+      label Title:
+      input.form-control(name='title', type='text' , placeholder="Question")
+      br
+    #form-group
+      label Choices:
+        input.form-control(type='text', name='choice1' , placeholder='Choice1')
+      br 
+      label
+        input.form-control(type='text', name='choice2' , placeholder='Choice2')  
+      br
+      label
+        input.form-control(type='text', name='choice3' , placeholder='Choice3') 
+      br
+      label Weight of the Question:
+        input.form-control(type='number' name='weight' , placeholder='Weight of the Question')
+      br
+    input.btn.btn-primary(type='submit',value='Submit')
