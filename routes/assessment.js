@@ -17,12 +17,14 @@ router.get('/', ensureAuthenticated, function(req, res){
 });
 
 router.get('/category1',ensureAuthenticated, function(req, res) {
-    Article.find({},function(err,articles){
+    Article.find({},function(err,articles,article,count){
         if(err) res.json(err);
         else {
         res.render('category1', {
         title:'Category 1 Questions',
-        articles: articles
+        articles: articles,
+        article: article,
+        article_index: count+1
       });
     }
     });
