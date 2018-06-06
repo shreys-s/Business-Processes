@@ -21,6 +21,10 @@ const ArticleSchema = mongoose.Schema({
     type: String,
     required: true
   },
+  answer:{
+    type: Number,
+    required: true
+  },
   weight:{
     type: Number,
     required: true

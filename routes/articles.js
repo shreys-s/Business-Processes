@@ -18,6 +18,8 @@ router.post('/add', function(req, res){
   req.checkBody('choice1','Choice is required').notEmpty();
   req.checkBody('choice2','Choice is required').notEmpty();
   req.checkBody('choice3','Choice is required').notEmpty();
+  req.checkBody('answer','Answer is required').notEmpty();
+  req.checkBody('weight','Weight of the Question is required').notEmpty();
 
 
   // Get Errors
@@ -35,6 +37,7 @@ router.post('/add', function(req, res){
     article.choice1 = req.body.choice1;
     article.choice2 = req.body.choice2;
     article.choice3 = req.body.choice3;
+    article.answer = req.body.answer;
     article.weight = req.body.weight;
     article.save(function(err){
       if(err){

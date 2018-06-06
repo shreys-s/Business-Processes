@@ -1,0 +1,18 @@
+extends layout
+
+block content
+  h1 #{title}
+  form(method='POST', action='#')
+    each article,i in articles
+      #form-group
+        label #{i+1} . #{article.title}
+        label.radio.inline
+          input(type='radio', name='#{i+1}', value='1')
+          span  #{article.choice1} 
+        label.radio.inline
+          input(type='radio', name='#{i+1}', value='2')
+          span #{article.choice2} 
+        label.radio.inline
+          input(type='radio', name='#{i+1}', value='3')
+          span  #{article.choice3} 
+    input.btn.btn-primary(type='submit',value='Submit')
