@@ -1,6 +1,7 @@
 var currentQuestion = 0;
 var score = 0;
-var totQuestions = Articles.length;
+var i=0;
+var totQuestions = #{articles.length};
 
 var container = document.getElementById('quizContainer');
 var questiontext = document.getElementById('question');
@@ -11,12 +12,11 @@ var nextButton = document.getElementById('nextButton');
 var previousButton = document.getElementById('previousButton');
 var resultCont = document.getElementById('result');
 
-function loadQuestion (ArticleIndex) {
-	var q=Articles[ArticleIndex];
-	questiontext.textContent = (ArticleIndex + 1) + '. ' + q.title;
-	opt1.textContent = q.choice1;
-	opt2.textContent = q.choice2;
-	opt3.textContent = q.choice3;
+function loadQuestion (i) {
+	questiontext.textContent = (i + 1) + '. ' + #{ articles[i].title } ;
+	opt1.textContent = #{articles[i].choice1};
+	opt2.textContent = #{articles[i].choice2};
+	opt3.textContent = #{articles[i].choice3};
 };
 function loadPreviousQuestion(){ 
 	currentQuestion--; 
@@ -34,7 +34,7 @@ function loadNextQuestion() {
 		return;
 	}
 	var answer = selectedOption.value;
-	if(articles[currentQuestion].answer == answer){
+	if( #{articles[currentQuestion].answer} == answer){
 		score+=10;
 	}
 	selectedOption.checked = false;

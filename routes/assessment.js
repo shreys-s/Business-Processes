@@ -16,17 +16,22 @@ router.get('/', ensureAuthenticated, function(req, res){
     });
 });
 
-router.get('/category1',ensureAuthenticated, function(req, res) {
-    Article.find({},function(err,articles,article,count){
+router.get('/category1',function(req, res) {
+    Article.find({},function(err,articles){
         if(err) res.json(err);
-        else {
-        res.render('category1', {
-        title:'Category 1 Questions',
-        articles: articles,
-        article: article,
-        article_index: count+1
-      });
-    }
+        else{
+          res.render('temporary', {
+          articles: articles
+          });
+        }
+    });
+});
+router.get('/category1/data',function(req, res) {
+    Article.find({},function(err,articles){
+        if(err) res.json(err);
+        else{
+            res.send(articles)
+        }
     });
 });
 // Access Control

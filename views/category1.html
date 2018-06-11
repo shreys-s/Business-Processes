@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>AJAX</title>
+</head>
+<body>
+	<div id="quizContainer" class="container">
+		<div id="title" class="hidden">Procure To Pay</div>
+		<div id="question" class="question"></div>
+		<input type="radio" name="option" value="1"><span id="opt1"></span><br>
+		<input type="radio" name="option" value="2"><span id="opt2"></span><br>
+		<input type="radio" name="option" value="3"><span id="opt3"></span><br>
+		<button id="previousButton" class="previous-btn">Previous Question</button>
+		<button id="nextButton" class="next-btn" onclick="loadNextQuestion">Next Question</button>
+	</div>
+	<div id="result" class="container result" style="display:none;">
+	</div>
+	<script type="text/javascript" src="/bower_components/jquery/dist/jquery.js"></script>
+	<script type="text/javascript" src="/scripts.js"></script>
+</body>
+</html>
