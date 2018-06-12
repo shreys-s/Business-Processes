@@ -5,16 +5,25 @@
 </head>
 <body>
 	<div id="quizContainer" class="container">
-		<div id="title" class="hidden">Procure To Pay</div>
-		<div id="question" class="question"></div>
-		<input type="radio" name="option" value="1"><span id="opt1"></span><br>
-		<input type="radio" name="option" value="2"><span id="opt2"></span><br>
-		<input type="radio" name="option" value="3"><span id="opt3"></span><br>
-		<button id="previousButton" class="previous-btn">Previous Question</button>
-		<button id="nextButton" class="next-btn" onclick="loadNextQuestion">Next Question</button>
+		<div class="page-header">
+		  <h1>Procure to Pay</h1>      
+		</div>
+		<h4><div id="question" class="well"></div></h4>
+			<div class="container" id="options" span="col md-6">
+				<div class="radio">
+				<input type="radio" name="option" value="1"><span id="opt1"></span>
+				</div>
+				<div class="radio">
+				<input type="radio" name="option" value="2"><span id="opt2"></span>
+				</div>
+				<div class="radio">
+				<input type="radio" name="option" value="3"><span id="opt3"></span>
+				</div>
+			</div>
+		<button id="previousButton" class="btn btn-primary">Previous Question</button>
+		<button id="nextButton" class="btn btn-primary" >Next Question</button>
 	</div>
-	<div id="result" class="container result" style="display:none;">
-	</div>
+	<div id="result" class="alert alert-success" style="display:none;"></div>
 	<script type="text/javascript" src="/bower_components/jquery/dist/jquery.js"></script>
 	<script type="text/javascript" src="/scripts.js"></script>
 </body>

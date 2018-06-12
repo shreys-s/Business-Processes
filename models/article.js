@@ -19,7 +19,7 @@ const ArticleSchema = mongoose.Schema({
   },
   choice3:{
     type: String,
-    required: true
+    required: false
   },
   answer:{
     type: Number,

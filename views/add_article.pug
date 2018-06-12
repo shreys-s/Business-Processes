@@ -9,14 +9,16 @@ block content
       br
     #form-group
       label Choices:
-        input.form-control(type='text', name='choice1' , placeholder='Choice1')
-      br 
-      label
-        input.form-control(type='text', name='choice2' , placeholder='Choice2')  
-      br
-      label
+        input.form-control(type='text', name='choice1' , placeholder='Choice1') 
+        select.form-control(name='answer3')
+          for article in articles
+            option(value='#{article.title}') #{article.title}
+        br 
+        input.form-control(type='text', name='choice2' , placeholder='Choice2')
+        br
         input.form-control(type='text', name='choice3' , placeholder='Choice3') 
-      br
+        br
+      br    
       label Answer:
         input.form-control(type='number' name='answer' , placeholder='Enter 1,2 or 3')
       br

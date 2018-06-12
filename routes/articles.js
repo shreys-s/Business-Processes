@@ -6,11 +6,17 @@ let Article = require('../models/article');
 let User = require('../models/user');
 // Add Route
 router.get('/add', ensureAuthenticated, function(req, res){
-  res.render('add_article', {
-    title:'Add Question'
+  Article.find({}, function(err, articles){
+    if(err){
+      console.log(err);
+    } else {
+      res.render('add_article', {
+        title:'Add Question',
+        articles: articles
+      });
+    }
   });
 });
-
 // Add Submit POST Route
 router.post('/add', function(req, res){
   req.checkBody('title','Title is required').notEmpty();
