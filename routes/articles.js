@@ -20,14 +20,11 @@ router.get('/add', ensureAuthenticated, function(req, res){
 // Add Submit POST Route
 router.post('/add', function(req, res){
   req.checkBody('title','Title is required').notEmpty();
-  //req.checkBody('author','Author is required').notEmpty();
-  req.checkBody('choice1','Choice is required').notEmpty();
-  req.checkBody('choice2','Choice is required').notEmpty();
-  req.checkBody('choice3','Choice is required').notEmpty();
+  req.checkBody('tchoice1','Choice is required').notEmpty();
+  req.checkBody('tchoice2','Choice is required').notEmpty();
+  req.checkBody('tchoice3','Choice is required').notEmpty();
   req.checkBody('answer','Answer is required').notEmpty();
   req.checkBody('weight','Weight of the Question is required').notEmpty();
-
-
   // Get Errors
   let errors = req.validationErrors();
 
@@ -39,12 +36,19 @@ router.post('/add', function(req, res){
   } else {
     let article = new Article();
     article.title = req.body.title;
-    article.author = req.user._id;
-    article.choice1 = req.body.choice1;
-    article.choice2 = req.body.choice2;
-    article.choice3 = req.body.choice3;
+    article.choice1.title = req.body.tchoice1;
+    article.choice1.next_id = req.body.nextid1;
+    article.choice1.weight = req.body.wchoice1;
+    article.choice2.title = req.body.tchoice2;
+    article.choice2.next_id = req.body.nextid2;
+    article.choice2.weight = req.body.wchoice2;
+    article.choice3.title = req.body.tchoice3;
+    article.choice3.next_id = req.body.nextid3;
+    article.choice3.weight = req.body.wchoice3;
     article.answer = req.body.answer;
     article.weight = req.body.weight;
+    article.category = req.body.category;
+    article.author = req.user._id;
     article.save(function(err){
       if(err){
         console.log(err);

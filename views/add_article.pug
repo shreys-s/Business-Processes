@@ -1,23 +1,51 @@
 extends layout
-
 block content
   h1 #{title}
   form(method='POST', action='/articles/add')
     #form-group
-      label Title:
-      input.form-control(name='title', type='text' , placeholder="Question")
-      br
+      .well
+        label Select Category:
+        select.form-control(name='category')
+          option(value= 1) 1. Procure To Pay 
+          option(value= 2) 2. Order To Cash
+          option(value= 3) 3. Hire to Retire
+      .well
+        label Title:
+        input.form-control(name='title', type='text' , placeholder="Question")
     #form-group
       label Choices:
-        input.form-control(type='text', name='choice1' , placeholder='Choice1') 
-        select.form-control(name='answer3')
-          for article in articles
-            option(value='#{article.title}') #{article.title}
-        br 
-        input.form-control(type='text', name='choice2' , placeholder='Choice2')
-        br
-        input.form-control(type='text', name='choice3' , placeholder='Choice3') 
-        br
+      .well
+        label Choice 1:
+        input.form-control(type='text', name='tchoice1' , placeholder='Choice1') 
+        label Select Sub Question:
+        select.form-control(name='nextid1')
+          option(value= -1) No Sub Question
+          for article,i in articles
+            option(value= i) #{i+1}. #{article.title}
+        label Weight of the Choice:
+        input.form-control(type='number', name='wchoice1' , placeholder='Weight of Choice 1')
+      br 
+      .well
+        label Choice 2:
+        input.form-control(type='text', name='tchoice2' , placeholder='Choice2') 
+        label Select Sub Question:
+        select.form-control(name='nextid2')
+          option(value= -1) No Sub Question
+          for article,i in articles
+            option(value= i) #{i+1}. #{article.title}
+        label Weight of the Choice:
+        input.form-control(type='number', name='wchoice2' , placeholder='Weight of Choice 2')
+      br 
+      .well
+        label Choice 3:
+        input.form-control(type='text', name='tchoice3' , placeholder='Choice3') 
+        label Select Sub Question:
+        select.form-control(name='nextid3')
+          option(value= -1) No Sub Question
+          for article,i in articles
+            option(value= i) #{i+1}. #{article.title}
+        label Weight of the Choice:
+        input.form-control(type='number', name='wchoice3' , placeholder='Weight of Choice 3')
       br    
       label Answer:
         input.form-control(type='number' name='answer' , placeholder='Enter 1,2 or 3')

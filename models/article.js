@@ -6,26 +6,65 @@ const ArticleSchema = mongoose.Schema({
     required: true
   },
   author:{
-    type: String,
-    required: true
+    type: String
   },
   choice1:{
-    type: String,
-    required: true
+    title:
+    {
+      type: String,
+      required: true
+    },
+    next_id:
+    {
+      type: Number
+    },
+    weight:
+    {
+      type: Number,
+      required:true
+    }
   },
   choice2:{
-    type: String,
-    required: true
+    title:
+    {
+      type: String,
+      required: true
+    },
+    next_id:
+    {
+      type: Number
+    },
+    weight:
+    {
+      type: Number,
+      required:true
+    }
   },
   choice3:{
-    type: String,
-    required: false
+    title:
+    {
+      type: String,
+      required: true
+    },
+    next_id:
+    {
+      type: Number
+    },
+    weight:
+    {
+      type: Number,
+      required:true
+    }
   },
   answer:{
     type: Number,
     required: true
   },
   weight:{
+    type: Number,
+    required: true
+  },
+  category:{
     type: Number,
     required: true
   }
