@@ -1,6 +1,6 @@
 var userListData = [];
 var currentQuestion = 0;
-var score = 0;
+var score = [];
 var totQuestions;
 
 var container = document.getElementById('quizContainer');
@@ -28,9 +28,9 @@ function loadQuestion (ArticleIndex) {
 		totQuestions=userListData.length;
 		console.log(totQuestions);
 		questiontext.textContent = (ArticleIndex + 1) + '. ' + userListData[ArticleIndex].title;
-		opt1.textContent = userListData[ArticleIndex].choice1;
-		opt2.textContent = userListData[ArticleIndex].choice2;
-		opt3.textContent = userListData[ArticleIndex].choice3;
+		opt1.textContent = userListData[ArticleIndex].choice1.title;
+		opt2.textContent = userListData[ArticleIndex].choice2.title;
+		opt3.textContent = userListData[ArticleIndex].choice3.title;
 	});
 };
 
@@ -41,24 +41,44 @@ function loadNextQuestion(){
 		return;
 	}
 	var answer = selectedOption.value;
-	if(userListData[currentQuestion].answer == answer){
-		score+=10;
+	if(answer == 1){
+		score[currentQuestion]=userListData[currentQuestion].choice1.weight;
+		if(userListData[currentQuestion].choice1.next_id == -1)
+			currentQuestion++;
+		else
+			currentQuestion=userListData[currentQuestion].choice1.next_id;
+	}
+	if(answer == 2){
+		score[currentQuestion]=userListData[currentQuestion].choice2.weight;
+		if(userListData[currentQuestion].choice2.next_id == -1)
+			currentQuestion++;
+		else
+			currentQuestion=userListData[currentQuestion].choice2.next_id;
+	}
+	if(answer == 3){
+		score[currentQuestion]=userListData[currentQuestion].choice3.weight;
+		if(userListData[currentQuestion].choice3.next_id == -1)
+			currentQuestion++;
+		else
+			currentQuestion=userListData[currentQuestion].choice3.next_id;
 	}
 	selectedOption.checked = false;
-	currentQuestion++;
 	if(currentQuestion == totQuestions - 1){
 		nextButton.textContent = 'Submit';
 	}
 	if(currentQuestion == totQuestions){
 		container.style.display = 'none';
 		resultCont.style.display = '';
-		resultCont.textContent = 'Your Score: ' + score;
+		resultCont.textContent = 'Your Score: ' + score[0];
 		return; 
 	}
 	loadQuestion(currentQuestion);
 };
 function loadPreviousQuestion(){
-	currentQuestion--; 
+	if(currentQuestion== 0)
+		currentQuestion=0;
+	else
+		currentQuestion--; 
 	loadQuestion(currentQuestion); 
 	if(currentQuestion == totQuestions - 1){ 
 		nextButton.textContent = 'Finish';
