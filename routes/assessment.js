@@ -70,18 +70,49 @@ router.post('/general', ensureAuthenticated, function(req, res){
   }
 });
 
-router.get('/category1',ensureAuthenticated, function(req, res) {
+router.get('/procuretopay', ensureAuthenticated, function(req, res){
+      res.render('procuretopay', {
+        title: 'Select Section',
+      });
+});
+
+router.get('/procuretopay/purchasesection',ensureAuthenticated, function(req, res) {
     Article.find({},function(err,articles){
         if(err) res.json(err);
         else{
-          res.render('category1', {
+          res.render('purchasesection', {
           articles: articles
           });
         }
     });
 });
-router.get('/category1/data',ensureAuthenticated, function(req, res) {
-    Article.find({},function(err,articles){
+
+router.get('/procuretopay/category1/data',ensureAuthenticated, function(req, res) {
+    Article.find({'section' : 11},function(err,articles){
+        if(err) res.json(err);
+        else{
+            res.send(articles)
+        }
+    });
+});
+router.get('/procuretopay/category2/data',ensureAuthenticated, function(req, res) {
+    Article.find({'section' : 12},function(err,articles){
+        if(err) res.json(err);
+        else{
+            res.send(articles)
+        }
+    });
+});
+router.get('/procuretopay/category3/data',ensureAuthenticated, function(req, res) {
+    Article.find({'section' : 13},function(err,articles){
+        if(err) res.json(err);
+        else{
+            res.send(articles)
+        }
+    });
+});
+router.get('/procuretopay/category4/data',ensureAuthenticated, function(req, res) {
+    Article.find({'section' : 14},function(err,articles){
         if(err) res.json(err);
         else{
             res.send(articles)

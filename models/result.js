@@ -1,37 +1,41 @@
-var mongoose = require('mongoose');
-var Schema = mongoose.Schema,
-    ObjectId = Schema.Types.ObjectId;
-
-var ResultSchema = new Schema({
-  date: {
-      type: Date,
-      required: true,
-      default: new Date()
+const mongoose = require('mongoose');
+// Article Schema
+const ResultSchema = mongoose.Schema({
+  category:{
+    type: Number,
+    required: true
   },
-  user_id: {
-      type: ObjectId,
-      required: true,
-      ref: 'User'
+  section:{
+    type: Number,
+    required: true
   },
-  question_id: {
-      type: ObjectId,
+  user:{
+    type: String
+  },
+  question:{
+    title:
+    {
+      type: String,
       required: true
-  },
-  choice_id: {
+    },
+    weight:
+    {
       type: Number,
-      required: true,
-      default: -1
+      required:true
+    }
   },
-  question: {
-      type: ObjectId,
-      ref: 'Article'
+  answer:{
+    title:
+    {
+      type: String,
+      required: true
+    },
+    weight:
+    {
+      type: Number,
+      required:true
+    }
   }
 });
-ResultSchema.index({
-    date: 1
-});
-var Result = mongoose.model('Result', ResultSchema);
-module.exports = {
-    mongoose: mongoose,
-    Result: Result
-}
+
+const Result = module.exports = mongoose.model('Result', ResultSchema);

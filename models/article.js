@@ -43,8 +43,7 @@ const ArticleSchema = mongoose.Schema({
   choice3:{
     title:
     {
-      type: String,
-      required: true
+      type: String
     },
     next_id:
     {
@@ -52,8 +51,7 @@ const ArticleSchema = mongoose.Schema({
     },
     weight:
     {
-      type: Number,
-      required:true
+      type: Number
     }
   },
   answer:{
@@ -67,6 +65,9 @@ const ArticleSchema = mongoose.Schema({
   category:{
     type: Number,
     required: true
+  },
+  section:{
+    type: Number
   }
 });
 

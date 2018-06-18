@@ -1,6 +1,8 @@
 var userListData = [];
 var currentQuestion = 0;
 var score = [];
+for(var i=0; i< totQuestions;i++)
+ score[i]=-1;
 var totQuestions;
 
 var container = document.getElementById('quizContainer');
@@ -33,7 +35,6 @@ function loadQuestion (ArticleIndex) {
 		opt3.textContent = userListData[ArticleIndex].choice3.title;
 	});
 };
-
 function loadNextQuestion(){
 	var selectedOption = document.querySelector('input[type=radio]:checked');
 	if(!selectedOption){

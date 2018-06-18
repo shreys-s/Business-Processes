@@ -22,7 +22,6 @@ router.post('/add', function(req, res){
   req.checkBody('title','Title is required').notEmpty();
   req.checkBody('tchoice1','Choice is required').notEmpty();
   req.checkBody('tchoice2','Choice is required').notEmpty();
-  req.checkBody('tchoice3','Choice is required').notEmpty();
   req.checkBody('answer','Answer is required').notEmpty();
   req.checkBody('weight','Weight of the Question is required').notEmpty();
   // Get Errors
@@ -49,6 +48,7 @@ router.post('/add', function(req, res){
     article.weight = req.body.weight;
     article.category = req.body.category;
     article.author = req.user._id;
+    article.section = req.body.section;
     article.save(function(err){
       if(err){
         console.log(err);

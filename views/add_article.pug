@@ -3,12 +3,48 @@ block content
   h1 #{title}
   form(method='POST', action='/articles/add')
     #form-group
+      script(language='javascript', type='text/javascript').
+        function dynamicdropdown(listindex)
+        {
+        switch (listindex)
+        {
+        case '1' :
+        document.getElementById("section").options[0]=new Option("Select Section","");
+        document.getElementById("section").options[1]=new Option("Purchase Section",11);
+        document.getElementById("section").options[2]=new Option("Vendor Analysis",12);
+        document.getElementById("section").options[3]=new Option("Finances",13);
+        document.getElementById("section").options[4]=new Option("ERP Section",14);
+        break;
+        case '2' :
+        document.getElementById("section").options[0]=new Option("Select Section","");
+        document.getElementById("section").options[1]=new Option("Credit Analysis",21);
+        document.getElementById("section").options[2]=new Option("Billing",22);
+        document.getElementById("section").options[3]=new Option("Cash Application & Collection",23);
+        document.getElementById("section").options[4]=new Option("GL Posting & Reporting",24);
+        break;
+        case '3' :
+        document.getElementById("section").options[0]=new Option("Select Section","");
+        document.getElementById("section").options[1]=new Option("Human Resources Planning",31);
+        document.getElementById("section").options[2]=new Option("Recruiting",32);
+        document.getElementById("section").options[3]=new Option("Emplyoee Management",33);
+        document.getElementById("section").options[4]=new Option("Re-Deploy",34);
+        document.getElementById("section").options[5]=new Option("Payroll",35);
+        document.getElementById("section").options[6]=new Option("Retire",36);
+        break;
+        }
+        return true;
+        }
       .well
         label Select Category:
-        select.form-control(name='category')
-          option(value= 1) 1. Procure To Pay 
-          option(value= 2) 2. Order To Cash
-          option(value= 3) 3. Hire to Retire
+        select#source.form-control(name='category', onchange='javascript: dynamicdropdown(this.options[this.selectedIndex].value);')
+          option(value='') Select Category
+          option(value=1) 1. Procure to Pay
+          option(value=2) 2. Order to Cash
+          option(value=3) 3. Hire to Retire
+      .well
+        label Select Section:
+        script(type='text/javascript', language='JavaScript').
+          document.write('<select name="section" id="section" class="form-control"><option value="">Select Section</option></select>')
       .well
         label Title:
         input.form-control(name='title', type='text' , placeholder="Question")
