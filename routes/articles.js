@@ -63,14 +63,17 @@ router.post('/add', function(req, res){
 
 // Load Edit Form
 router.get('/edit/:id', ensureAuthenticated, function(req, res){
-  Article.findById(req.params.id, function(err, article){
-    if(article.author != req.user._id){
-      req.flash('danger', 'Not Authorized');
-      res.redirect('/');
-    }
-    res.render('edit_article', {
-      title:'Edit Article',
-      article:article
+  Article.find({}, function(err, articles){
+    Article.findById(req.params.id, function(err, article){
+      if(article.author != req.user._id){
+        req.flash('danger', 'Not Authorized');
+        res.redirect('/');
+      }
+      res.render('edit_article', {
+        title:'Edit Article',
+        article:article,
+        articles:articles
+      });
     });
   });
 });
@@ -79,7 +82,6 @@ router.get('/edit/:id', ensureAuthenticated, function(req, res){
 router.post('/edit/:id', function(req, res){
   let article = {};
   article.title = req.body.title;
-  article.author = req.body.author;
 
   let query = {_id:req.params.id}
 

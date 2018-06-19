@@ -4,20 +4,90 @@ block content
   h1 #{title}
   form(method='POST', action='/articles/edit/'+article._id)
     #form-group
-      label Title:
-      input.form-control(name='title', type='text', value=article.title)
+      script(language='javascript', type='text/javascript').
+        function dynamicdropdown(listindex)
+        {
+        switch (listindex)
+        {
+        case '1' :
+        document.getElementById("section").options[0]=new Option("Select Section","");
+        document.getElementById("section").options[1]=new Option("Purchase Section",11);
+        document.getElementById("section").options[2]=new Option("Vendor Analysis",12);
+        document.getElementById("section").options[3]=new Option("Finances",13);
+        document.getElementById("section").options[4]=new Option("ERP Section",14);
+        break;
+        case '2' :
+        document.getElementById("section").options[0]=new Option("Select Section","");
+        document.getElementById("section").options[1]=new Option("Credit Analysis",21);
+        document.getElementById("section").options[2]=new Option("Billing",22);
+        document.getElementById("section").options[3]=new Option("Cash Application & Collection",23);
+        document.getElementById("section").options[4]=new Option("GL Posting & Reporting",24);
+        break;
+        case '3' :
+        document.getElementById("section").options[0]=new Option("Select Section","");
+        document.getElementById("section").options[1]=new Option("Human Resources Planning",31);
+        document.getElementById("section").options[2]=new Option("Recruiting",32);
+        document.getElementById("section").options[3]=new Option("Emplyoee Management",33);
+        document.getElementById("section").options[4]=new Option("Re-Deploy",34);
+        document.getElementById("section").options[5]=new Option("Payroll",35);
+        document.getElementById("section").options[6]=new Option("Retire",36);
+        break;
+        }
+        return true;
+        }
+      .well
+        label Select Category:
+        select#source.form-control(name='category', onchange='javascript: dynamicdropdown(this.options[this.selectedIndex].value);')
+          option(value='') Select Category
+          option(value=1) 1. Procure to Pay
+          option(value=2) 2. Order to Cash
+          option(value=3) 3. Hire to Retire
+      .well
+        label Select Section:
+        script(type='text/javascript', language='JavaScript').
+          document.write('<select name="section" id="section" class="form-control"><option value="">Select Section</option></select>')
+      .well
+        label Title:
+        input.form-control(name='title', type='text' , placeholder="Question", value=article.title)
     #form-group
-      label Author:
-      input.form-control(name='author', type='text', value=user.name)
-      br
-    #form-group
-      label
-        input.form-control(type="text" name="answer1" value=article.answer1)
+      label Choices:
+      .well
+        label Choice 1:
+        input.form-control(type='text', name='tchoice1' , placeholder='Choice1',value=article.choice1.title) 
+        label Select Sub Question:
+        select.form-control(name='nextid1')
+          option(value= -1) No Sub Question
+          for article,i in articles
+            option(value= i) #{i+1}. #{article.title}
+        label Weight of the Choice:
+        input.form-control(type='number', name='wchoice1' , placeholder='Weight of Choice 1', value=article.choice1.weight)
       br 
-      label
-        input.form-control(type="text" name="answer2" value=article.answer2)  
+      .well
+        label Choice 2:
+        input.form-control(type='text', name='tchoice2' , placeholder='Choice2', value=article.choice2.title) 
+        label Select Sub Question:
+        select.form-control(name='nextid2')
+          option(value= -1) No Sub Question
+          for article,i in articles
+            option(value= i) #{i+1}. #{article.title}
+        label Weight of the Choice:
+        input.form-control(type='number', name='wchoice2' , placeholder='Weight of Choice 2', value=article.choice2.weight)
+      br 
+      .well
+        label Choice 3:
+        input.form-control(type='text', name='tchoice3' , placeholder='Choice3',value=article.choice3.title) 
+        label Select Sub Question:
+        select.form-control(name='nextid3')
+          option(value= -1) No Sub Question
+          for article,i in articles
+            option(value= i) #{i+1}. #{article.title}
+        label Weight of the Choice:
+        input.form-control(type='number', name='wchoice3' , placeholder='Weight of Choice 3', value=article.choice3.weight)
+      br    
+      label Answer:
+        input.form-control(type='number' name='answer' , placeholder='Enter 1,2 or 3')
       br
-      label
-        input.form-control(type="text" name="answer3" value=article.answer3) 
-    br
+      label Weight of the Question:
+        input.form-control(type='number' name='weight' , placeholder='Weight of the Question', value=article.weight)
+      br
     input.btn.btn-primary(type='submit',value='Submit')
