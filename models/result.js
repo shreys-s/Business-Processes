@@ -9,6 +9,10 @@ const ResultSchema = mongoose.Schema({
     type: Number,
     required: true
   },
+  updated: { 
+    type: Date, 
+    default: Date.now 
+  },
   user:{
     type: String
   },
@@ -25,16 +29,8 @@ const ResultSchema = mongoose.Schema({
     }
   },
   answer:{
-    title:
-    {
-      type: String,
-      required: true
-    },
-    weight:
-    {
       type: Number,
       required:true
-    }
   }
 });
 

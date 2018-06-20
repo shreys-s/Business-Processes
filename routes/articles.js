@@ -80,12 +80,30 @@ router.get('/edit/:id', ensureAuthenticated, function(req, res){
 
 // Update Submit POST Route
 router.post('/edit/:id', function(req, res){
-  let article = {};
-  article.title = req.body.title;
 
   let query = {_id:req.params.id}
 
-  Article.update(query, article, function(err){
+  Article.update(query, {"title" : req.body.title, 
+                          "choice2" : { 
+                                        "next_id" : req.body.nextid2,
+                                        "weight"  : req.body.wchoice2,
+                                        "title"   : req.body.tchoice2
+                                      },
+                          "choice1" : { 
+                                        "next_id" : req.body.nextid1,
+                                        "weight"  : req.body.wchoice1,
+                                        "title"   : req.body.tchoice1
+                                      },
+                          "choice3" : { 
+                                        "next_id" : req.body.nextid3,
+                                        "weight"  : req.body.wchoice3,
+                                        "title"   : req.body.tchoice3
+                                      },
+                          "answer" : req.body.answer,
+                          "weight" : req.body.weight,
+                          "category" : req.body.category,
+                          "section" : req.body.section
+} , function(err){
     if(err){
       console.log(err);
       return;

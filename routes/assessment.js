@@ -69,56 +69,89 @@ router.post('/general', ensureAuthenticated, function(req, res){
     });
   }
 });
+	//PROCURE TO PAY 
+		router.get('/procuretopay', ensureAuthenticated, function(req, res){
+		    res.render('procuretopay', {
+		        title: 'Select Section',
+		    });
+		});
 
-router.get('/procuretopay', ensureAuthenticated, function(req, res){
-      res.render('procuretopay', {
-        title: 'Select Section',
-      });
-});
 
-router.get('/procuretopay/purchasesection',ensureAuthenticated, function(req, res) {
-    Article.find({},function(err,articles){
-        if(err) res.json(err);
-        else{
-          res.render('purchasesection', {
-          articles: articles
-          });
-        }
-    });
-});
+		router.get('/procuretopay/purchasesection',ensureAuthenticated, function(req, res) {
+		    res.render('purchasesection');
+		});
+    router.post('/procuretopay/purchasesection',ensureAuthenticated, function(req,res){
+        var obj = {};
+        console.log(JSON.stringify(req.body.length));
+          let errors = req.validationErrors();
 
-router.get('/procuretopay/category1/data',ensureAuthenticated, function(req, res) {
-    Article.find({'section' : 11},function(err,articles){
-        if(err) res.json(err);
-        else{
-            res.send(articles)
-        }
+          if(errors){
+            res.render('add_article', {
+              title:'Add Article',
+              errors:errors
+            });
+          } else {
+            for (var i = 0; i < req.body.length; i++) {
+              let result = new Result();
+              result.category = req.body[i].category;
+              result.section = req.body[i].section;
+              result.updated = new Date;
+              result.user = req.user.name;
+              result.question.title = req.body[i].question_title;
+              result.question.weight = req.body[i].question_weight;
+              result.answer = req.body[i].answer_weight;
+              result.save(function(err){
+                  req.flash('success','Results Added');
+              });
+            }
+          }
     });
-});
-router.get('/procuretopay/category2/data',ensureAuthenticated, function(req, res) {
-    Article.find({'section' : 12},function(err,articles){
-        if(err) res.json(err);
-        else{
-            res.send(articles)
-        }
-    });
-});
-router.get('/procuretopay/category3/data',ensureAuthenticated, function(req, res) {
-    Article.find({'section' : 13},function(err,articles){
-        if(err) res.json(err);
-        else{
-            res.send(articles)
-        }
-    });
-});
-router.get('/procuretopay/category4/data',ensureAuthenticated, function(req, res) {
-    Article.find({'section' : 14},function(err,articles){
-        if(err) res.json(err);
-        else{
-            res.send(articles)
-        }
-    });
-});
+
+		router.get('/procuretopay/vendoranalysis',ensureAuthenticated, function(req, res) {
+		    res.render('vendoranalysis');
+		});
+
+		router.get('/procuretopay/finances',ensureAuthenticated, function(req, res) {
+		    res.render('finances');
+		});
+
+		router.get('/procuretopay/erpsystem',ensureAuthenticated, function(req, res) {
+		    res.render('erpsystem');
+		});
+
+		router.get('/procuretopay/category1/data',ensureAuthenticated, function(req, res) {
+		    Article.find({'section' : 11},function(err,articles){
+		        if(err) res.json(err);
+		        else{
+		            res.send(articles)
+		        }
+		    });
+		});
+
+		router.get('/procuretopay/category2/data',ensureAuthenticated, function(req, res) {
+		    Article.find({'section' : 12},function(err,articles){
+		        if(err) res.json(err);
+		        else{
+		            res.send(articles)
+		        }
+		    });
+		});
+		router.get('/procuretopay/category3/data',ensureAuthenticated, function(req, res) {
+		    Article.find({'section' : 13},function(err,articles){
+		        if(err) res.json(err);
+		        else{
+		            res.send(articles)
+		        }
+		    });
+		});
+		router.get('/procuretopay/category4/data',ensureAuthenticated, function(req, res) {
+		    Article.find({'section' : 14},function(err,articles){
+		        if(err) res.json(err);
+		        else{
+		            res.send(articles)
+		        }
+		    });
+		});
 // Access Control
 function ensureAuthenticated(req, res, next){
   if(req.isAuthenticated()){

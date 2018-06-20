@@ -123,4 +123,13 @@ function submitAnswers(){
 	}
     console.log(newData.result);
     console.log(userListData);
+    $.ajax({
+    	type: "POST",
+    	url: "http://localhost:3000/assessment/procuretopay/purchasesection",
+    		data: JSON.stringify(newData.result),
+    		contentType: 'application/json',
+    		success: function(data){
+    			console.log('success');
+    		}
+    });
 }
