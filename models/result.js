@@ -2,11 +2,11 @@ const mongoose = require('mongoose');
 // Article Schema
 const ResultSchema = mongoose.Schema({
   category:{
-    type: Number,
+    type: String,
     required: true
   },
   section:{
-    type: Number,
+    type: String,
     required: true
   },
   updated: { 

@@ -5,7 +5,7 @@ const router = express.Router();
 let Article = require('../models/article');
 let User = require('../models/user');
 // Add Route
-router.get('/add', ensureAuthenticated, function(req, res){
+router.get('/add', ensureAuthenticated, isAdmin, function(req, res){
   Article.find({}, function(err, articles){
     if(err){
       console.log(err);
@@ -17,12 +17,12 @@ router.get('/add', ensureAuthenticated, function(req, res){
     }
   });
 });
+
 // Add Submit POST Route
 router.post('/add', function(req, res){
   req.checkBody('title','Title is required').notEmpty();
   req.checkBody('tchoice1','Choice is required').notEmpty();
   req.checkBody('tchoice2','Choice is required').notEmpty();
-  req.checkBody('answer','Answer is required').notEmpty();
   req.checkBody('weight','Weight of the Question is required').notEmpty();
   // Get Errors
   let errors = req.validationErrors();
@@ -44,7 +44,6 @@ router.post('/add', function(req, res){
     article.choice3.title = req.body.tchoice3;
     article.choice3.next_id = req.body.nextid3;
     article.choice3.weight = req.body.wchoice3;
-    article.answer = req.body.answer;
     article.weight = req.body.weight;
     article.category = req.body.category;
     article.author = req.user._id;
@@ -61,6 +60,18 @@ router.post('/add', function(req, res){
   }
 });
 
+router.get('/view', ensureAuthenticated, isAdmin, function(req,res){
+  Article.find({},function(err, articles){
+    if(err)
+      console.log(err);
+    else {
+      res.render('view_questions',{
+        title: 'List of all the Questions',
+        articles: articles
+      });
+    }
+  });
+});
 // Load Edit Form
 router.get('/edit/:id', ensureAuthenticated, function(req, res){
   Article.find({}, function(err, articles){
@@ -99,7 +110,6 @@ router.post('/edit/:id', function(req, res){
                                         "weight"  : req.body.wchoice3,
                                         "title"   : req.body.tchoice3
                                       },
-                          "answer" : req.body.answer,
                           "weight" : req.body.weight,
                           "category" : req.body.category,
                           "section" : req.body.section
@@ -131,13 +141,14 @@ router.delete('/:id', function(req, res){
           console.log(err);
         }
         res.send('Success');
+        res.redirect('/view')
       });
     }
   });
 });
 
 // Get Single Article
-router.get('/:id', function(req, res){
+router.get('/:id',ensureAuthenticated, function(req, res){
   Article.findById(req.params.id, function(err, article){
     User.findById(article.author, function(err, user){
       res.render('article', {
@@ -156,6 +167,14 @@ function ensureAuthenticated(req, res, next){
     req.flash('danger', 'Please login');
     res.redirect('/users/login');
   }
+}
+
+function isAdmin(req,res,next){
+  if(req.user.isAdmin)
+    return next();
+  else
+    req.flash('danger', ' You are not allowed to access this !');
+    res.redirect('/users/login');
 }
 
 module.exports = router;

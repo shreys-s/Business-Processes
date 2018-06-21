@@ -11,26 +11,26 @@ block content
         {
         case '1' :
         document.getElementById("section").options[0]=new Option("Select Section","");
-        document.getElementById("section").options[1]=new Option("Purchase Section",11);
-        document.getElementById("section").options[2]=new Option("Vendor Analysis",12);
-        document.getElementById("section").options[3]=new Option("Finances",13);
-        document.getElementById("section").options[4]=new Option("ERP Section",14);
+        document.getElementById("section").options[1]=new Option("Purchase Section","Purchase Section");
+        document.getElementById("section").options[2]=new Option("Vendor Analysis","Vendor Analysis");
+        document.getElementById("section").options[3]=new Option("Finances","Finances");
+        document.getElementById("section").options[4]=new Option("ERP Section","ERP Section");
         break;
         case '2' :
         document.getElementById("section").options[0]=new Option("Select Section","");
-        document.getElementById("section").options[1]=new Option("Credit Analysis",21);
-        document.getElementById("section").options[2]=new Option("Billing",22);
-        document.getElementById("section").options[3]=new Option("Cash Application & Collection",23);
-        document.getElementById("section").options[4]=new Option("GL Posting & Reporting",24);
+        document.getElementById("section").options[1]=new Option("Credit Analysis","Credit Analysis");
+        document.getElementById("section").options[2]=new Option("Billing","Billing");
+        document.getElementById("section").options[3]=new Option("Cash Application & Collection","Cash Application & Collection");
+        document.getElementById("section").options[4]=new Option("GL Posting & Reporting","GL Posting & Reporting");
         break;
         case '3' :
         document.getElementById("section").options[0]=new Option("Select Section","");
-        document.getElementById("section").options[1]=new Option("Human Resources Planning",31);
-        document.getElementById("section").options[2]=new Option("Recruiting",32);
-        document.getElementById("section").options[3]=new Option("Emplyoee Management",33);
-        document.getElementById("section").options[4]=new Option("Re-Deploy",34);
-        document.getElementById("section").options[5]=new Option("Payroll",35);
-        document.getElementById("section").options[6]=new Option("Retire",36);
+        document.getElementById("section").options[1]=new Option("Human Resources Planning","Human Resources Planning");
+        document.getElementById("section").options[2]=new Option("Recruiting","Recruiting");
+        document.getElementById("section").options[3]=new Option("Emplyoee Management","Emplyoee Management");
+        document.getElementById("section").options[4]=new Option("Re-Deploy","Re-Deploy");
+        document.getElementById("section").options[5]=new Option("Payroll","Payroll");
+        document.getElementById("section").options[6]=new Option("Retire","Retire");
         break;
         }
         return true;
@@ -39,9 +39,9 @@ block content
         label Select Category:
         select#source.form-control(name='category', onchange='javascript: dynamicdropdown(this.options[this.selectedIndex].value);')
           option(value='') Select Category
-          option(value=1) 1. Procure to Pay
-          option(value=2) 2. Order to Cash
-          option(value=3) 3. Hire to Retire
+          option(value="Procure to Pay") 1. Procure to Pay
+          option(value="Order to Cash") 2. Order to Cash
+          option(value="Hire to Retire") 3. Hire to Retire
       .well
         label Select Section:
         script(type='text/javascript', language='JavaScript').
@@ -83,11 +83,9 @@ block content
             option(value= i) #{i+1}. #{article.title}
         label Weight of the Choice:
         input.form-control(type='number', name='wchoice3' , placeholder='Weight of Choice 3', value=article.choice3.weight)
-      br    
-      label Answer:
-        input.form-control(type='number' name='answer' , placeholder='Enter 1,2 or 3')
       br
-      label Weight of the Question:
+      .well    
+        label Weight of the Question:
         input.form-control(type='number' name='weight' , placeholder='Weight of the Question', value=article.weight)
       br
     input.btn.btn-primary(type='submit',value='Submit')

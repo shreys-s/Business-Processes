@@ -54,20 +54,15 @@ const ArticleSchema = mongoose.Schema({
       type: Number
     }
   },
-  answer:{
-    type: Number,
-    required: true
-  },
   weight:{
     type: Number,
     required: true
   },
   category:{
-    type: Number,
-    required: true
+    type: String,
   },
   section:{
-    type: Number
+    type: String
   }
 });
 

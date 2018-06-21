@@ -17,14 +17,26 @@ html
         #navbar.collapse.navbar-collapse
           ul.nav.navbar-nav
             if user
-              li
-                a(href='/articles/add') Add Question
-              li
-                a(href='/assessment/general') Assessment
-              li
-                a(href='/assessment') Abhi ke liye hai
+              if user.isAdmin
+                li
+                  a(href='/articles/add') Add Question
+                li
+                  a(href='/articles/view') View Questions
+                li
+                  a(href='/assessment/general') Assessment
+                li
+                  a(href='/assessment') Abhi ke liye hai
+              else
+                li
+                  a(href='/assessment/general') Assessment
+                li
+                  a(href='/assessment') Abhi ke liye hai
+                li
+                  a(href='/assessment/results') Results
           ul.nav.navbar-nav.navbar-right
             if user
+              li
+                a(href='/') Hi #{user.name}
               li 
                 a(href='/users/logout') Logout
             else
