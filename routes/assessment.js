@@ -78,7 +78,7 @@ router.post('/general', ensureAuthenticated, function(req, res){
 
 
 		router.get('/procuretopay/purchasesection',ensureAuthenticated, function(req, res) {
-		    res.render('purchasesection');
+		    res.render('procuretopay/purchasesection');
 		});
     router.post('/procuretopay/purchasesection',ensureAuthenticated, function(req,res){
         var obj = {};
@@ -108,7 +108,7 @@ router.post('/general', ensureAuthenticated, function(req, res){
     });
 
 		router.get('/procuretopay/vendoranalysis',ensureAuthenticated, function(req, res) {
-		    res.render('vendoranalysis');
+		    res.render('procuretopay/vendoranalysis');
 		});
     router.post('/procuretopay/vendoranalysis',ensureAuthenticated, function(req,res){
         var obj = {};
@@ -138,12 +138,64 @@ router.post('/general', ensureAuthenticated, function(req, res){
     });
 
 		router.get('/procuretopay/finances',ensureAuthenticated, function(req, res) {
-		    res.render('finances');
+		    res.render('procuretopay/finances');
 		});
+    router.post('/procuretopay/finances',ensureAuthenticated, function(req,res){
+        var obj = {};
+        console.log(JSON.stringify(req.body.length));
+          let errors = req.validationErrors();
 
-		router.get('/procuretopay/erpsystem',ensureAuthenticated, function(req, res) {
-		    res.render('erpsystem');
+          if(errors){
+            res.render('add_article', {
+              title:'Add Article',
+              errors:errors
+            });
+          } else {
+            for (var i = 0; i < req.body.length; i++) {
+              let result = new Result();
+              result.category = req.body[i].category;
+              result.section = req.body[i].section;
+              result.updated = new Date;
+              result.user = req.user._id;
+              result.question.title = req.body[i].question_title;
+              result.question.weight = req.body[i].question_weight;
+              result.answer = req.body[i].answer_weight;
+              result.save(function(err){
+                  req.flash('success','Results Added');
+              });
+            }
+          }
+    });
+
+		router.get('/procuretopay/erpsection',ensureAuthenticated, function(req, res) {
+		    res.render('procuretopay/erpsection');
 		});
+    router.post('/procuretopay/erpsection',ensureAuthenticated, function(req,res){
+        var obj = {};
+        console.log(JSON.stringify(req.body.length));
+          let errors = req.validationErrors();
+
+          if(errors){
+            res.render('add_article', {
+              title:'Add Article',
+              errors:errors
+            });
+          } else {
+            for (var i = 0; i < req.body.length; i++) {
+              let result = new Result();
+              result.category = req.body[i].category;
+              result.section = req.body[i].section;
+              result.updated = new Date;
+              result.user = req.user._id;
+              result.question.title = req.body[i].question_title;
+              result.question.weight = req.body[i].question_weight;
+              result.answer = req.body[i].answer_weight;
+              result.save(function(err){
+                  req.flash('success','Results Added');
+              });
+            }
+          }
+    });
 
 		router.get('/procuretopay/category1/data',ensureAuthenticated, function(req, res) {
 		    Article.find({'section' : 'Purchase Section'},function(err,articles){
@@ -178,6 +230,168 @@ router.post('/general', ensureAuthenticated, function(req, res){
 		        }
 		    });
 		});
+//ORDER TO CASH
+    router.get('/ordertocash', ensureAuthenticated, function(req, res){
+        res.render('ordertocash', {
+            title: 'Select Section',
+        });
+    });
+
+
+    router.get('/ordertocash/creditanalysis',ensureAuthenticated, function(req, res) {
+        res.render('ordertocash/creditanalysis');
+    });
+    router.post('/ordertocash/creditanalysis',ensureAuthenticated, function(req,res){
+        var obj = {};
+        console.log(JSON.stringify(req.body.length));
+          let errors = req.validationErrors();
+
+          if(errors){
+            res.render('add_article', {
+              title:'Add Article',
+              errors:errors
+            });
+          } else {
+            for (var i = 0; i < req.body.length; i++) {
+              let result = new Result();
+              result.category = req.body[i].category;
+              result.section = req.body[i].section;
+              result.updated = new Date;
+              result.user = req.user._id;
+              result.question.title = req.body[i].question_title;
+              result.question.weight = req.body[i].question_weight;
+              result.answer = req.body[i].answer_weight;
+              result.save(function(err){
+                  req.flash('success','Results Added');
+              });
+            }
+          }
+    });
+
+    router.get('/ordertocash/billing',ensureAuthenticated, function(req, res) {
+        res.render('ordertocash/billing');
+    });
+    router.post('/ordertocash/billing',ensureAuthenticated, function(req,res){
+        var obj = {};
+        console.log(JSON.stringify(req.body.length));
+          let errors = req.validationErrors();
+
+          if(errors){
+            res.render('add_article', {
+              title:'Add Article',
+              errors:errors
+            });
+          } else {
+            for (var i = 0; i < req.body.length; i++) {
+              let result = new Result();
+              result.category = req.body[i].category;
+              result.section = req.body[i].section;
+              result.updated = new Date;
+              result.user = req.user._id;
+              result.question.title = req.body[i].question_title;
+              result.question.weight = req.body[i].question_weight;
+              result.answer = req.body[i].answer_weight;
+              result.save(function(err){
+                  req.flash('success','Results Added');
+              });
+            }
+          }
+    });
+
+    router.get('/ordertocash/cashapplication',ensureAuthenticated, function(req, res) {
+        res.render('ordertocash/cashapplication');
+    });
+    router.post('/ordertocash/cashapplication',ensureAuthenticated, function(req,res){
+        var obj = {};
+        console.log(JSON.stringify(req.body.length));
+          let errors = req.validationErrors();
+
+          if(errors){
+            res.render('add_article', {
+              title:'Add Article',
+              errors:errors
+            });
+          } else {
+            for (var i = 0; i < req.body.length; i++) {
+              let result = new Result();
+              result.category = req.body[i].category;
+              result.section = req.body[i].section;
+              result.updated = new Date;
+              result.user = req.user._id;
+              result.question.title = req.body[i].question_title;
+              result.question.weight = req.body[i].question_weight;
+              result.answer = req.body[i].answer_weight;
+              result.save(function(err){
+                  req.flash('success','Results Added');
+              });
+            }
+          }
+    });
+
+    router.get('/ordertocash/glposting',ensureAuthenticated, function(req, res) {
+        res.render('ordertocash/glposting');
+    });
+    router.post('/ordertocash/glposting',ensureAuthenticated, function(req,res){
+        var obj = {};
+        console.log(JSON.stringify(req.body.length));
+          let errors = req.validationErrors();
+
+          if(errors){
+            res.render('add_article', {
+              title:'Add Article',
+              errors:errors
+            });
+          } else {
+            for (var i = 0; i < req.body.length; i++) {
+              let result = new Result();
+              result.category = req.body[i].category;
+              result.section = req.body[i].section;
+              result.updated = new Date;
+              result.user = req.user._id;
+              result.question.title = req.body[i].question_title;
+              result.question.weight = req.body[i].question_weight;
+              result.answer = req.body[i].answer_weight;
+              result.save(function(err){
+                  req.flash('success','Results Added');
+              });
+            }
+          }
+    });
+
+    router.get('/ordertocash/category1/data',ensureAuthenticated, function(req, res) {
+        Article.find({'section' : 'Credit Analysis'},function(err,articles){
+            if(err) res.json(err);
+            else{
+                res.send(articles)
+            }
+        });
+    });
+
+    router.get('/ordertocash/category2/data',ensureAuthenticated, function(req, res) {
+        Article.find({'section' : 'Billing'},function(err,articles){
+            if(err) res.json(err);
+            else{
+                res.send(articles)
+            }
+        });
+    });
+    router.get('/ordertocash/category3/data',ensureAuthenticated, function(req, res) {
+        Article.find({'section' : 'Cash Application & Collection'},function(err,articles){
+            if(err) res.json(err);
+            else{
+                res.send(articles)
+            }
+        });
+    });
+    router.get('/ordertocash/category4/data',ensureAuthenticated, function(req, res) {
+        Article.find({'section' : 'GL Posting & Reporting'},function(err,articles){
+            if(err) res.json(err);
+            else{
+                res.send(articles)
+            }
+        });
+    });
+
     router.get('/results',ensureAuthenticated, function(req, res) {
         Result.find({},function(err,results){
             if(err) res.json(err);

@@ -1,0 +1,22 @@
+extends layout
+block content
+	#quizContainer.container
+		h1 ERP Section
+		#question.well
+		#options.container(span='col md-6')
+			.radio
+				input(type='radio', name='option', value='1')
+				span#opt1
+			.radio
+				input(type='radio', name='option', value='2')
+				span#opt2
+			#c3.radio
+				input(type='radio', name='option', value='3')
+				span#opt3
+		button#previousButton.btn.btn-primary Previous Question
+		button#nextButton.btn.btn-primary Next Question
+	#result.alert.alert-success(style='display:none;')
+	a(href='http://localhost:3000/assessment/procuretopay')
+		button#nextSection.btn.btn-primary(style='display:none;') Next Section
+	script(type='text/javascript', src='/bower_components/jquery/dist/jquery.js')
+	script(type='text/javascript', src='/procuretopay/section-14.js')
