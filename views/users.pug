@@ -1,0 +1,8 @@
+extends layout
+
+block content
+  h1 #{title}
+  ul.list-group
+    each user, i in users
+      li.list-group-item
+        a(href=''+user._id) #{i+1}. #{user.name}  | #{user.company}

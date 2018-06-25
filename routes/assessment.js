@@ -412,6 +412,42 @@ router.post('/general', ensureAuthenticated, function(req, res){
             }
         });
     });
+
+    //ADMIN PART 
+    router.get('/results/users',ensureAuthenticated,function(req, res) {
+      User.find({},function(err,users){
+        if(err) 
+          res.json(err)
+        else
+        {
+          res.render('users',{
+            title: 'All data:',
+            users  : users
+          });
+        }
+      });
+    });
+
+    router.get('/results/:id',ensureAuthenticated, function(req, res) {
+        Result.find({},function(err,results){
+            if(err) res.json(err);
+            else{
+                res.render('userdata', {
+                  title: 'Your Result:',
+                  results: results
+                });
+            }
+        });
+    });
+    router.get('/results/data/:id',ensureAuthenticated, function(req, res) {
+        Result.find({},function(err,results){
+            if(err) res.json(err);
+            else{
+                res.send(results)
+            }
+        });
+    });
+
 // Access Control
 function ensureAuthenticated(req, res, next){
   if(req.isAuthenticated()){
@@ -420,6 +456,14 @@ function ensureAuthenticated(req, res, next){
     req.flash('danger', 'Please login');
     res.redirect('/users/login');
   }
+}
+
+function isAdmin(req,res,next){
+  if(req.user.isAdmin)
+    return next();
+  else
+    req.flash('danger', ' You are not allowed to access this !');
+    res.redirect('/users/login');
 }
 
 module.exports = router;
