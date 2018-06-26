@@ -403,8 +403,28 @@ router.post('/general', ensureAuthenticated, function(req, res){
             }
         });
     });
-    router.get('/results/data',ensureAuthenticated, function(req, res) {
+    router.post('/results/p2p',ensureAuthenticated, function(req, res) {
+        var obj = {};
+        let query = {_id:req.user._id}
+        console.log(req.body.purchasesection);
+        console.log(req.body.vendoranalysis);
+        User.update(query, {"p2p" : { 
+                                      "purchasesection" : req.body.purchasesection,
+                                      "vendoranalysis"  : req.body.vendoranalysis,
+                                      "erpsection" : req.body.erpsection,
+                                      "finances" :  req.body.finances
+                                    }
+        } , function(err){
+          if(err){
+            console.log(err);
+            return;
+          } else {
+            req.flash('success', 'User Details Updated');
+          }
+        });
 
+    });
+    router.get('/results/data',ensureAuthenticated, function(req, res) {
         Result.find({'user' : req.user._id },function(err,results){
             if(err) res.json(err);
             else{
@@ -427,6 +447,15 @@ router.post('/general', ensureAuthenticated, function(req, res){
         }
       });
     });
+    router.get('/results/users/data',ensureAuthenticated, function(req, res) {
+        User.find({},function(err,users){
+            if(err) res.json(err);
+            else{
+                res.send(users)
+            }
+        });
+    });
+
 
     router.get('/results/:id',ensureAuthenticated, function(req, res) {
         Result.find({},function(err,results){

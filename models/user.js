@@ -25,6 +25,28 @@ const UserSchema = mongoose.Schema({
   isAdmin:{
   	type: Boolean,
   	default: false
+  },
+  p2p:{
+    purchasesection:{
+      type: Number,
+      default:0
+    },
+    vendoranalysis:{
+      type: Number,
+      default:0
+    },
+    erpsection:{
+      type:Number,
+      default:0
+    },
+    finances:{
+      type:Number,
+      default:0
+    },
+    score:{
+      type:Number,
+      default:0
+    }
   }
 });
 
