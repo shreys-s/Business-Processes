@@ -1,13 +1,16 @@
 extends layout
-
 block content
-  h1 Login
-  form(method='POST', action='/users/login')
-    #form-group
-      label Username:
-      input.form-control(name='username',type='text')
-    #form-group
-      label Password:
-      input.form-control(name='password',type='password')
-    br
-    input.btn.btn-primary(type='submit',value='Submit')
+  div
+    .login_wrapper
+      .animate.form.login_form
+        section.login_content
+          form(method='POST' action='/users/login')
+            h1 Login Form
+            div
+              input.form-control(type='text', placeholder='Username', name='username')
+            div
+              input.form-control(type='password', placeholder='Password', name='password')
+            div
+              input.btn.btn-primary(type='submit',value='Submit')
+            .clearfix
+

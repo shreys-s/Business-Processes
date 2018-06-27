@@ -1,61 +1,205 @@
 doctype html
-html
+html(lang='en')
   head
-    title Business Process
-    link(rel='stylesheet' href='/bower_components/bootstrap/dist/css/bootstrap.css')
-    link(rel='stylesheet' href='/css/style.css')
-  body
-    nav.navbar.navbar-inverse
-      .container
-        .navbar-header
-          button.navbar-toggle.collapsed(type='button', data-toggle='collapse', data-target='#navbar', aria-expanded='false', aria-controls='navbar')
-            span.sr-only Toggle navigation
-            span.icon-bar
-            span.icon-bar
-            span.icon-bar
-          a.navbar-brand(href='/') Business Processes
-        #navbar.collapse.navbar-collapse
-          ul.nav.navbar-nav
-            if user
-              if user.isAdmin
-                li
-                  a(href='/articles/add') Add Question
-                li
-                  a(href='/articles/view') View Questions
-                li
-                  a(href='/assessment/general') Assessment
-                li
-                  a(href='/assessment') Abhi ke liye hai
-                li
-                  a(href='/assessment/results/users') All Data 
-              else
-                li
-                  a(href='/assessment/general') Assessment
-                li
-                  a(href='/assessment') Abhi ke liye hai
-                li
-                  a(href='/assessment/results') Results
-          ul.nav.navbar-nav.navbar-right
-            if user
-              li
-                a(href='/') Hi #{user.name}
-              li 
-                a(href='/users/logout') Logout
-            else
-              li
-                a(href='/users/register') Register
-              li
-                a(href='/users/login') Login
-    .container
-      != messages('message', locals)
-      if errors
-        each error, i in errors
-          div(class="alert alert-danger") #{error.msg}
-      block content
-      br
-      hr
-      footer
-        p Copyright &copy; Wipro | Business Process Team
-    script(src='/bower_components/jquery/dist/jquery.js')  
-    script(src='/bower_components/bootstrap/dist/js/bootstrap.js')
-    script(src='/js/main.js')  
+    meta(http-equiv='Content-Type', content='text/html; charset=UTF-8')
+    // Meta, title, CSS, favicons, etc.
+    meta(charset='utf-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    link(rel='icon', href='images/favicon.ico', type='image/ico')
+    title Business Processes 
+    // Bootstrap
+    link(href='/bower_components/bootstrap/dist/css/bootstrap.min.css', rel='stylesheet')
+    // Font Awesome
+    link(href='/bower_components/font-awesome/css/font-awesome.min.css', rel='stylesheet')
+    // NProgress
+    link(href='/bower_components/nprogress/nprogress.css', rel='stylesheet')
+    // iCheck
+    link(href='/bower_components/iCheck/skins/flat/green.css', rel='stylesheet')
+    // bootstrap-progressbar
+    link(href='/bower_components/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css', rel='stylesheet')
+    // JQVMap
+    link(href='/bower_components/jqvmap/dist/jqvmap.min.css', rel='stylesheet')
+    // bootstrap-daterangepicker
+    link(href='/bower_components/bootstrap-daterangepicker/daterangepicker.css', rel='stylesheet')
+    // Custom Theme Style
+    link(href='/css/custom.min.css', rel='stylesheet')
+  body.nav-md
+    .container.body
+      .main_container
+        .col-md-3.left_col
+          .left_col.scroll-view
+            .navbar.nav_title(style='border: 0;')
+              a.site_title(href='/')
+                i.fa.fa-leaf
+                span Business Processes
+            .clearfix
+            br
+            // sidebar menu
+            #sidebar-menu.main_menu_side.hidden-print.main_menu
+              .menu_section
+                ul.nav.side-menu
+                  if user
+                    if user.isAdmin
+                      li
+                        a
+                          i.fa.fa-question-circle
+                          |  Questions 
+                          span.fa.fa-chevron-down
+                        ul.nav.child_menu
+                          li
+                            a(href='/articles/add') Add Question
+                          li
+                            a(href='/articles/view') View Questions
+                      li
+                        a
+                          i.fa.fa-university
+                          |  Assessment 
+                          span.fa.fa-chevron-down
+                        ul.nav.child_menu
+                          li
+                            a(href='/assessment/general') Assessment
+                          li
+                            a(href='/assessment') Abhi ke liye hai
+                      li
+                        a
+                          i.fa.fa-pagelines
+                          |  Users Data 
+                          span.fa.fa-chevron-down
+                        ul.nav.child_menu
+                          li
+                            a(href='/assessment/results/users') All Data
+                          li
+                            a(href='/assessment/results') Results
+                      li
+                        a(href='/users/logout')
+                          i.fa.fa-user
+                          |  Logout
+                    else
+                      li
+                        a
+                          i.fa.fa-university
+                          |  Assessment 
+                          span.fa.fa-chevron-down
+                        ul.nav.child_menu
+                          li
+                            a(href='/assessment/general') Assessment
+                          li
+                            a(href='/assessment') Abhi ke liye hai
+                      li
+                        a(href='/assessment/results')
+                          i.fa.fa-pagelines
+                          |  Results
+                      li
+                        a(href='/users/logout')
+                          i.fa.fa-user
+                          |  Logout
+                  else
+                    li
+                      a(href='/users/login')
+                        i.fa.fa-user
+                        |  Login
+                    li
+                      a(href='/users/register')
+                        i.fa.fa-user
+                        |  Register
+            // /sidebar menu
+            // /menu footer buttons
+            .sidebar-footer.hidden-small
+              a(data-toggle='tooltip', data-placement='top', title='Settings')
+                span.glyphicon.glyphicon-cog(aria-hidden='true')
+              a(data-toggle='tooltip', data-placement='top', title='FullScreen')
+                span.glyphicon.glyphicon-fullscreen(aria-hidden='true')
+              a(data-toggle='tooltip', data-placement='top', title='Lock')
+                span.glyphicon.glyphicon-eye-close(aria-hidden='true')
+              a(data-toggle='tooltip', data-placement='top', title='Logout', href='login.html')
+                span.glyphicon.glyphicon-off(aria-hidden='true')
+            // /menu footer buttons
+        // top navigation
+        .top_nav
+          .nav_menu
+            nav
+              .nav.toggle
+                a#menu_toggle
+                  i.fa.fa-bars
+              ul.nav.navbar-nav.navbar-right
+                if user
+                  li 
+                    a(href='/users/logout') Logout
+                  li
+                    a.user-profile.dropdown-toggle(href='javascript:;', data-toggle='dropdown', aria-expanded='false')
+                      | #{user.name}
+                      span.fa.fa-angle-down
+                    ul.dropdown-menu.dropdown-usermenu.pull-right
+                      li
+                        a(href='javascript:;')  Profile
+                      li
+                        a(href='javascript:;')
+                          span.badge.bg-red.pull-right 50%
+                          span Settings
+                      li
+                        a(href='javascript:;') Help
+                else
+                  li
+                    a(href='/users/register') Register
+                  li
+                    a(href='/users/login') Login               
+
+
+
+        // /top navigation
+        // page content
+        .right_col(role='main')
+          .row
+            != messages('message', locals)
+            if errors
+              each error, i in errors
+                div(class="alert alert-danger") #{error.msg}
+            block content
+        // page content
+        // footer content
+        footer
+          .pull-right
+            p Copyright &copy; Wipro | Business Process Team
+          .clearfix
+        // /footer content
+    // jQuery
+    script(src='/bower_components/jquery/dist/jquery.min.js')
+    // Bootstrap
+    script(src='/bower_components/bootstrap/dist/js/bootstrap.min.js')
+    // FastClick
+    script(src='/bower_components/fastclick/lib/fastclick.js')
+    // NProgress
+    script(src='/bower_components/nprogress/nprogress.js')
+    // Chart.js
+    script(src='/bower_components/Chart.js/dist/Chart.min.js')
+    // gauge.js
+    script(src='/bower_components/gauge.js/dist/gauge.min.js')
+    // bootstrap-progressbar
+    script(src='/bower_components/bootstrap-progressbar/bootstrap-progressbar.min.js')
+    // iCheck
+    script(src='/bower_components/iCheck/icheck.min.js')
+    // Skycons
+    script(src='/bower_components/skycons/skycons.js')
+    // Flot
+    script(src='/bower_components/Flot/jquery.flot.js')
+    script(src='/bower_components/Flot/jquery.flot.pie.js')
+    script(src='/bower_components/Flot/jquery.flot.time.js')
+    script(src='/bower_components/Flot/jquery.flot.stack.js')
+    script(src='/bower_components/Flot/jquery.flot.resize.js')
+    // Flot plugins
+    script(src='/bower_components/flot.orderbars/js/jquery.flot.orderBars.js')
+    script(src='/bower_components/flot-spline/js/jquery.flot.spline.min.js')
+    script(src='/bower_components/flot.curvedlines/curvedLines.js')
+    // DateJS
+    script(src='/bower_components/DateJS/build/date.js')
+    // JQVMap
+    script(src='/bower_components/jqvmap/dist/jquery.vmap.js')
+    script(src='/bower_components/jqvmap/dist/maps/jquery.vmap.world.js')
+    script(src='/bower_components/jqvmap/examples/js/jquery.vmap.sampledata.js')
+    // bootstrap-daterangepicker
+    script(src='/bower_components/moment/min/moment.min.js')
+    script(src='/bower_components/bootstrap-daterangepicker/daterangepicker.js')
+    // Custom Theme Scripts
+    script(src='/js/custom.min.js')
+    script(src='/js/main.js')

@@ -47,7 +47,52 @@ const UserSchema = mongoose.Schema({
       type:Number,
       default:0
     }
+  },
+  o2c:{
+    billing:{
+      type: Number,
+      default:0
+    },
+    cashapplication:{
+      type: Number,
+      default:0
+    },
+    creditanalysis:{
+      type:Number,
+      default:0
+    },
+    glposting:{
+      type:Number,
+      default:0
+    },
+    score:{
+      type:Number,
+      default:0
+    }
+  },
+  h2r:{
+    purchasesection:{
+      type: Number,
+      default:0
+    },
+    vendoranalysis:{
+      type: Number,
+      default:0
+    },
+    erpsection:{
+      type:Number,
+      default:0
+    },
+    finances:{
+      type:Number,
+      default:0
+    },
+    score:{
+      type:Number,
+      default:0
+    }
   }
+
 });
 
 const User = module.exports = mongoose.model('User', UserSchema);

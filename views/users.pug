@@ -1,8 +1,37 @@
-extends layout
+extends layout 
 block content
   script(type='text/javascript' src='/average.js').
-  h1 #{title}
-  ul.list-group
-    each user, i in users
-      li.list-group-item
-        a(href=''+user._id) #{i+1}. #{user.name}  | #{user.company}
+  .col-md-12.col-sm-12.col-xs-12
+    .x_panel
+      .x_title
+        h2
+          | User Data 
+        .clearfix
+        .table-responsive
+          table.table.table-striped.jambo_table.bulk_action
+            thead
+              tr.headings
+                th.column-title Index 
+                th.column-title User-Name 
+                th.column-title Company
+                th.column-title Procure To Pay 
+                th.column-title Order To Cash 
+                th.column-title Hire To Retire 
+                th.column-title Action
+            tbody
+              each user,i in users
+                tr.even.pointer
+                  td. 
+                    #{i+1}
+                  td. 
+                    #{user.name} 
+                  td.
+                    #{user.company} 
+                  td. 
+                    #{user.p2p.score}
+                  td. 
+                    #{user.o2c.score}
+                  td. 
+                    #{user.h2r.score}
+                  td.last
+                    a(href=''+user._id) View
