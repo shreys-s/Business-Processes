@@ -85,8 +85,8 @@
                 gauge.unoccupied = {
                                     y: gauge.maximum - gauge.data.y , 
                                     color: "#DEDEDE", 
-                                    toolTipContent: "high", 
-                                    highlightEnabled: true,
+                                    toolTipContent: null, 
+                                    highlightEnabled: false,
                                     click : function (){ gauge.unoccupied.exploded = true; }
                                 }
                 gauge.data.click = function (){ gauge.data.exploded = true; };
@@ -101,7 +101,7 @@
                               {
                                 y: gauge.maximum ,
                                 color: "transparent",
-                                toolTipContent: `
+                                toolTipContent: null
                               },
                               gauge.data,
                               gauge.unoccupied
