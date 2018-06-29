@@ -444,12 +444,19 @@ router.post('/general', ensureAuthenticated, function(req, res){
                   title: 'Your Result:',
                   user: user,
                   allusers : users
-
                 });
             }
         });
       });
     });
+    router.get('/results/userdata',ensureAuthenticated, function(req, res) {
+        User.findById(req.user._id,function(err,user){
+            if(err) res.json(err);
+            else{
+                res.send(user);
+            }
+        });
+      });
     router.get('/results/data',ensureAuthenticated, function(req, res) {
         Result.find({'user' : req.user._id },function(err,results){
             if(err) res.json(err);
