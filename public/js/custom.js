@@ -2950,7 +2950,7 @@ if (typeof NProgress != 'undefined') {
 			  
 			  //echart Bar
 			  
-			if ($('#mainb').length ){
+		
 			  
 				  var echartBar = echarts.init(document.getElementById('mainb'), theme);
 
@@ -3021,7 +3021,6 @@ if (typeof NProgress != 'undefined') {
 					}]
 				  });
 
-			}
 			  
 			  
 			  

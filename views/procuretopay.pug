@@ -1,6 +1,7 @@
 extends layout
 
 block content
+  script(type='text/javascript' src='/results-p2p.js').
   .clearfix
   .row
     .col-md-8.center-margin
@@ -12,7 +13,7 @@ block content
          .x_content
           .col-md-8.center-margin 
            h4 #{title}
-           a.btn.btn-primary.btn-block(href='/assessment/procuretopay/purchasesection' onClick='return false;') Purchase Section
+           a.btn.btn-primary.btn-block(href='/assessment/procuretopay/purchasesection') Purchase Section
            a.btn.btn-primary.btn-block(href='/assessment/procuretopay/vendoranalysis') Vendor Analyis
            a.btn.btn-primary.btn-block(href='/assessment/procuretopay/finances') Finances
            a.btn.btn-primary.btn-block(href='/assessment/procuretopay/erpsection') ERP Section

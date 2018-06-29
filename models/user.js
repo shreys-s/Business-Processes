@@ -71,19 +71,19 @@ const UserSchema = mongoose.Schema({
     }
   },
   h2r:{
-    purchasesection:{
+    hiring:{
       type: Number,
       default:0
     },
-    vendoranalysis:{
+    employeemanagement:{
       type: Number,
       default:0
     },
-    erpsection:{
+    payroll:{
       type:Number,
       default:0
     },
-    finances:{
+    retire:{
       type:Number,
       default:0
     },

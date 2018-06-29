@@ -392,27 +392,17 @@ router.post('/general', ensureAuthenticated, function(req, res){
         });
     });
 
-    router.get('/results',ensureAuthenticated, function(req, res) {
-        Result.find({},function(err,results){
-            if(err) res.json(err);
-            else{
-                res.render('results', {
-                  title: 'Your Result:',
-                  results: results
-                });
-            }
-        });
-    });
+
     router.post('/results/p2p',ensureAuthenticated, function(req, res) {
         var obj = {};
         let query = {_id:req.user._id}
-        console.log(req.body.purchasesection);
-        console.log(req.body.vendoranalysis);
+        console.log(req.body.score);
         User.update(query, {"p2p" : { 
                                       "purchasesection" : req.body.purchasesection,
                                       "vendoranalysis"  : req.body.vendoranalysis,
                                       "erpsection" : req.body.erpsection,
-                                      "finances" :  req.body.finances
+                                      "finances" :  req.body.finances,
+                                      "score" : req.body.score
                                     }
         } , function(err){
           if(err){
@@ -423,6 +413,42 @@ router.post('/general', ensureAuthenticated, function(req, res){
           }
         });
 
+    });
+    router.post('/results/o2c',ensureAuthenticated, function(req, res) {
+        var obj = {};
+        let query = {_id:req.user._id}
+        console.log(req.body.score);
+        User.update(query, {"o2c" : { 
+                                      "creditanalysis" : req.body.creditanalysis,
+                                      "cashapplication"  : req.body.cashapplication,
+                                      "billing" : req.body.billing,
+                                      "glposting" :  req.body.glposting,
+                                      "score" : req.body.score
+                                    }
+        } , function(err){
+          if(err){
+            console.log(err);
+            return;
+          } else {
+            req.flash('success', 'User Details Updated');
+          }
+        });
+
+    });
+    router.get('/results',ensureAuthenticated, function(req, res) {
+      User.find({},function(err,users){
+        User.findById(req.user._id,function(err,user){
+            if(err) res.json(err);
+            else{
+                res.render('results', {
+                  title: 'Your Result:',
+                  user: user,
+                  allusers : users
+
+                });
+            }
+        });
+      });
     });
     router.get('/results/data',ensureAuthenticated, function(req, res) {
         Result.find({'user' : req.user._id },function(err,results){
@@ -440,7 +466,7 @@ router.post('/general', ensureAuthenticated, function(req, res){
           res.json(err)
         else
         {
-          res.render('users',{
+          res.render('userslist',{
             title: 'All data:',
             users  : users
           });

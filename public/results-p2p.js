@@ -7,8 +7,9 @@ var sfinances=0;
 var tfinances=0;
 var serp=0;
 var terp=0;
+var sp2p=0;
 window.onload = function () {
-    $.getJSON('results/data', function( data ) {
+    $.getJSON('http://localhost:3000/assessment/results/data', function( data ) {
         console.log(data);
         for(var i in data) {
             if(data[i].section == "Vendor Analysis")
@@ -32,33 +33,17 @@ window.onload = function () {
             terp=terp+data[i].question.weight;
             }
         };
-        svendor=svendor/tvendor;
-        spurchase=spurchase/tpurchase;
-        // serp=serp/terp;
-        // sfinances=sfinances/tfinances;
+        if (tvendor!=0)
+            svendor=(svendor/tvendor)*10;
+        if (tpurchase!=0)
+            spurchase=(spurchase/tpurchase)*10;
+        if (tfinances!=0)
+            sfinances=(sfinances/tfinances)*10;
+        if (terp!=0)
+            serp=(serp/terp)*10;
+        sp2p=(svendor+spurchase+sfinances+serp)/4;
 
         submitAnswers();
-
-        var chart = new CanvasJS.Chart("chartContainer", {
-            theme: "light1", // "light2", "dark1", "dark2"
-            animationEnabled: true, // change to true      
-            title:{
-                text: "Procure To Pay"
-            },
-            data: [
-            {
-                // Change type to "bar", "area", "spline", "pie",etc.
-                type: "column",
-                dataPoints: [
-                    { label:  "Vendor Analysis",  y: svendor  },
-                    { label: "Purchase Section", y: spurchase  },
-                    { label:  "Finances",  y: sfinances  },
-                    { label:  "ERP Section",  y: serp  }
-                ]
-            }
-            ]
-        });
-        chart.render();
     });
 }
 function submitAnswers(){
@@ -66,7 +51,8 @@ function submitAnswers(){
         purchasesection: spurchase,
         vendoranalysis: svendor,
         finances: sfinances,
-        erpsection: serp
+        erpsection: serp,
+        score: sp2p
     };
     console.log(sendInfo);
     $.ajax({
