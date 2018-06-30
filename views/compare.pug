@@ -14,6 +14,10 @@ block content
 							button#nextDataPoint.btn.btn-primary Next Companies
 	script(type="text/javascript").
 		window.onload = function () {
+		$.getJSON('http://localhost:3000/assessment/results/allusers/data', function(allusers) {
+		console.log(allusers);
+		var total=allusers.length;
+		var count=0;
 
 		var chart = new CanvasJS.Chart("chartContainer4", {
 			animationEnabled: true,  
@@ -32,14 +36,15 @@ block content
 				xValueFormatString: "Company Name",
 				type: "spline",
 				dataPoints: [
-					{ y: 10 },
-					{ y:  4 },
-					{ y: 18 },
-					{ y:  8 }	
+					{ x: 0 , y: 10 },
+					{ x: 1 , y:  4 },
+					{ x: 2 , y: 18 },
+					{ x: 3 ,  y:  8 }	
 				]
 			}]
 		});
 		chart.render();
+
 		$("#nextDataPoint").click(function () {
 
 		chart.options.title.text = "Procure To Pay Maturity Data";
@@ -67,6 +72,7 @@ block content
 		chart.options.data[0].dataPoints[3].x = chart.options.data[0].dataPoints[3].x - 3;
 		chart.options.axisY.stripLines[0].value = chart.options.axisY.stripLines[0].value - 5;
 		chart.render();
+		});
 		});
 		}
 	script(src='https://canvasjs.com/assets/script/canvasjs.min.js')
