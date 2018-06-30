@@ -1,6 +1,15 @@
 extends layout 
 block content
-  script(type='text/javascript' src='/userdata.js').
-  #chartContainer(style='height: 370px; width: 100%;')
-  #chartContainer2(style='height: 370px; width: 100%;')
-  script(src='https://canvasjs.com/assets/script/canvasjs.min.js')
+	.clearfix
+	.row
+		.col-md-10.center-margin
+			.x_panel
+				.x_title
+					h3 #{title}
+					.clearfix
+				.x_content
+						#chartContainer(style='height: 370px; width: 100%;')
+						#chartContainer3(style='height: 370px; width: 100%;')
+						#chartContainer2(style='height: 370px; width: 100%;')
+	script(type="text/javascript" src="/admin-userdata.js").
+	script(src='https://canvasjs.com/assets/script/canvasjs.min.js')

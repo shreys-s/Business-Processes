@@ -1,0 +1,72 @@
+extends layout 
+block content
+	.clearfix
+	.row
+		.col-md-10.center-margin
+			.x_panel
+				.x_title
+					h3 #{title}
+					.clearfix
+				.x_content
+						#chartContainer4(style='height: 370px; width: 100%;')
+						.col-md-5.center-margin
+							button#previousDataPoint.btn.btn-danger Previous Companies
+							button#nextDataPoint.btn.btn-primary Next Companies
+	script(type="text/javascript").
+		window.onload = function () {
+
+		var chart = new CanvasJS.Chart("chartContainer4", {
+			animationEnabled: true,  
+			title:{
+				text: "Procure To Pay Maturity Data"
+			},
+			axisY: {
+				title: "Maturity",
+				suffix: "%",
+				stripLines: [{
+					value: 12,
+					label: "Average"
+				}]
+			},
+			data: [{
+				xValueFormatString: "Company Name",
+				type: "spline",
+				dataPoints: [
+					{ y: 10 },
+					{ y:  4 },
+					{ y: 18 },
+					{ y:  8 }	
+				]
+			}]
+		});
+		chart.render();
+		$("#nextDataPoint").click(function () {
+
+		chart.options.title.text = "Procure To Pay Maturity Data";
+		chart.options.data[0].dataPoints[0].y = chart.options.data[0].dataPoints[0].y + 5;
+		chart.options.data[0].dataPoints[0].x = chart.options.data[0].dataPoints[0].x +3;
+		chart.options.data[0].dataPoints[1].y = chart.options.data[0].dataPoints[1].y + 5;
+		chart.options.data[0].dataPoints[1].x = chart.options.data[0].dataPoints[1].x +3;
+		chart.options.data[0].dataPoints[2].y = chart.options.data[0].dataPoints[2].y + 5;
+		chart.options.data[0].dataPoints[2].x = chart.options.data[0].dataPoints[2].x +3;
+		chart.options.data[0].dataPoints[3].y = chart.options.data[0].dataPoints[3].y + 5;
+		chart.options.data[0].dataPoints[3].x = chart.options.data[0].dataPoints[3].x +3;
+		chart.options.axisY.stripLines[0].value = chart.options.axisY.stripLines[0].value + 5;
+		chart.render();
+		});
+		$("#previousDataPoint").click(function () {
+
+		chart.options.title.text = "Procure To Pay Maturity Data";
+		chart.options.data[0].dataPoints[0].y = chart.options.data[0].dataPoints[0].y - 5;
+		chart.options.data[0].dataPoints[0].x = chart.options.data[0].dataPoints[0].x - 3;
+		chart.options.data[0].dataPoints[1].y = chart.options.data[0].dataPoints[1].y - 5;
+		chart.options.data[0].dataPoints[1].x = chart.options.data[0].dataPoints[1].x - 3;
+		chart.options.data[0].dataPoints[2].y = chart.options.data[0].dataPoints[2].y - 5;
+		chart.options.data[0].dataPoints[2].x = chart.options.data[0].dataPoints[2].x - 3;
+		chart.options.data[0].dataPoints[3].y = chart.options.data[0].dataPoints[3].y - 5;
+		chart.options.data[0].dataPoints[3].x = chart.options.data[0].dataPoints[3].x - 3;
+		chart.options.axisY.stripLines[0].value = chart.options.axisY.stripLines[0].value - 5;
+		chart.render();
+		});
+		}
+	script(src='https://canvasjs.com/assets/script/canvasjs.min.js')

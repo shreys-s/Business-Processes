@@ -393,6 +393,8 @@ router.post('/general', ensureAuthenticated, function(req, res){
     });
 
 
+//USER PART
+
     router.post('/results/p2p',ensureAuthenticated, function(req, res) {
         var obj = {};
         let query = {_id:req.user._id}
@@ -435,19 +437,18 @@ router.post('/general', ensureAuthenticated, function(req, res){
         });
 
     });
-    router.get('/results',ensureAuthenticated, function(req, res) {
-      User.find({},function(err,users){
-        User.findById(req.user._id,function(err,user){
+    router.get('/results/data',ensureAuthenticated, function(req, res) {
+        Result.find({'user' : req.user._id },function(err,results){
             if(err) res.json(err);
             else{
-                res.render('results', {
-                  title: 'Your Result:',
-                  user: user,
-                  allusers : users
-                });
+                res.send(results)
             }
         });
-      });
+    });
+    router.get('/results',ensureAuthenticated, function(req, res) {
+       res.render('results', {
+        title: 'Your Result:'
+        });
     });
     router.get('/results/userdata',ensureAuthenticated, function(req, res) {
         User.findById(req.user._id,function(err,user){
@@ -457,17 +458,15 @@ router.post('/general', ensureAuthenticated, function(req, res){
             }
         });
       });
-    router.get('/results/data',ensureAuthenticated, function(req, res) {
-        Result.find({'user' : req.user._id },function(err,results){
-            if(err) res.json(err);
-            else{
-                res.send(results)
-            }
-        });
-    });
+
 
     //ADMIN PART 
-    router.get('/results/users',ensureAuthenticated,function(req, res) {
+    router.get('/compare',ensureAuthenticated, function(req, res) {
+                res.render('compare', {
+                  title: 'All Companies Data',
+                });
+    });
+    router.get('/results/allusers',ensureAuthenticated,function(req, res) {
       User.find({},function(err,users){
         if(err) 
           res.json(err)
@@ -480,7 +479,7 @@ router.post('/general', ensureAuthenticated, function(req, res){
         }
       });
     });
-    router.get('/results/users/data',ensureAuthenticated, function(req, res) {
+    router.get('/results/allusers/data',ensureAuthenticated, function(req, res) {
         User.find({},function(err,users){
             if(err) res.json(err);
             else{
@@ -488,27 +487,19 @@ router.post('/general', ensureAuthenticated, function(req, res){
             }
         });
     });
-
-
     router.get('/results/:id',ensureAuthenticated, function(req, res) {
-        Result.find({},function(err,results){
-            if(err) res.json(err);
-            else{
                 res.render('userdata', {
                   title: 'Your Result:',
-                  results: results
                 });
-            }
         });
-    });
-    router.get('/results/data/:id',ensureAuthenticated, function(req, res) {
-        Result.find({},function(err,results){
-            if(err) res.json(err);
-            else{
-                res.send(results)
-            }
+    router.get('/results/allusers/data/:id',ensureAuthenticated, function(req, res) {
+        User.find({},function(err,users){
+              if(err) res.json(err);
+              else{
+                   res.send(users)
+                }
+            });
         });
-    });
 
 // Access Control
 function ensureAuthenticated(req, res, next){

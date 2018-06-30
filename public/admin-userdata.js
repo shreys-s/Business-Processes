@@ -1,11 +1,18 @@
-
-
+var user=[];
+var p2p=[0,0,0,0,0];
+var o2c=[0,0,0,0,0];
+var h2r=[0,0,0,0,0];
 window.onload = function () {
-    var p2p=[0,0,0,0,0];
-    var o2c=[0,0,0,0,0];
-    var h2r=[0,0,0,0,0];
-    $.getJSON('http://localhost:3000/assessment/results/userdata', function(user) {
-        console.log(user);
+
+    $.getJSON('allusers/data/:id', function( data ) {
+    var url = window.location.href;
+    var id = url.substring(url.lastIndexOf('/') + 1);
+    for(var i in data) {
+        if(data[i]._id == id){
+            user[0]=data[i];
+        }
+    }
+    console.log(user);
     $.getJSON('http://localhost:3000/assessment/results/allusers/data', function(allusers) {
         console.log(allusers);
         for (var i = 0; i < allusers.length; i++) {
@@ -68,10 +75,10 @@ window.onload = function () {
             legendText: "Maturity",
             showInLegend: true, 
             dataPoints:[
-                { label: "Purchase Section", y: user.p2p.purchasesection },
-                { label: "Vendor Analysis", y: user.p2p.vendoranalysis },
-                { label: "Finances", y: user.p2p.finances },
-                { label: "ERP Section", y: user.p2p.erpsection }
+                { label: "Purchase Section", y: user[0].p2p.purchasesection },
+                { label: "Vendor Analysis", y: user[0].p2p.vendoranalysis },
+                { label: "Finances", y: user[0].p2p.finances },
+                { label: "ERP Section", y: user[0].p2p.erpsection }
             ]
         },
         {
@@ -134,10 +141,10 @@ window.onload = function () {
             color: "#F79E4F",
             showInLegend: true, 
             dataPoints:[
-                { label: "Billing", y: user.o2c.billing },
-                { label: "Cash Application & Collection", y: user.o2c.cashapplication },
-                { label: "Credit Analysis", y: user.o2c.creditanalysis },
-                { label: "GL Posting & Reporting", y: user.o2c.glposting }
+                { label: "Billing", y: user[0].o2c.billing },
+                { label: "Cash Application & Collection", y: user[0].o2c.cashapplication },
+                { label: "Credit Analysis", y: user[0].o2c.creditanalysis },
+                { label: "GL Posting & Reporting", y: user[0].o2c.glposting }
             ]
         },
         {
