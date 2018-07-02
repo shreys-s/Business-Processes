@@ -6,7 +6,6 @@ html(lang='en')
     meta(charset='utf-8')
     meta(http-equiv='X-UA-Compatible', content='IE=edge')
     meta(name='viewport', content='width=device-width, initial-scale=1')
-    link(rel='icon', href='images/favicon.ico', type='image/ico')
     title Business Processes 
     // Bootstrap
     link(href='/bower_components/bootstrap/dist/css/bootstrap.min.css', rel='stylesheet')
@@ -31,8 +30,9 @@ html(lang='en')
           .left_col.scroll-view
             .navbar.nav_title(style='border: 0;')
               a.site_title(href='/')
-                i.fa.fa-leaf
-                span Business Processes
+                i.fa.fa-money
+                | 
+                small Business Processes
             .clearfix
             br
             // sidebar menu
@@ -63,7 +63,7 @@ html(lang='en')
                             a(href='/assessment') Abhi ke liye hai
                       li
                         a
-                          i.fa.fa-pagelines
+                          i.fa.fa-book
                           |  Users Data 
                           span.fa.fa-chevron-down
                         ul.nav.child_menu
@@ -90,7 +90,7 @@ html(lang='en')
                             a(href='/assessment') Abhi ke liye hai
                       li
                         a(href='/assessment/results')
-                          i.fa.fa-pagelines
+                          i.fa.fa-book
                           |  Results
                       li
                         a(href='/users/logout')

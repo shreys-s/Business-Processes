@@ -391,6 +391,170 @@ router.post('/general', ensureAuthenticated, function(req, res){
             }
         });
     });
+//ORDERTOCASH_ENDS
+//HIRETORETIRE
+    router.get('/hiretoretire', ensureAuthenticated, function(req, res){
+        res.render('hiretoretire', {
+            title: 'Select Section',
+        });
+    });
+
+
+    router.get('/hiretoretire/hiring',ensureAuthenticated, function(req, res) {
+        res.render('hiretoretire/hiring');
+    });
+    router.post('/hiretoretire/hiring',ensureAuthenticated, function(req,res){
+        var obj = {};
+        console.log(JSON.stringify(req.body.length));
+          let errors = req.validationErrors();
+
+          if(errors){
+            res.render('add_article', {
+              title:'Add Article',
+              errors:errors
+            });
+          } else {
+            for (var i = 0; i < req.body.length; i++) {
+              let result = new Result();
+              result.category = req.body[i].category;
+              result.section = req.body[i].section;
+              result.updated = new Date;
+              result.user = req.user._id;
+              result.question.title = req.body[i].question_title;
+              result.question.weight = req.body[i].question_weight;
+              result.answer = req.body[i].answer_weight;
+              result.save(function(err){
+                  req.flash('success','Results Added');
+              });
+            }
+          }
+    });
+
+    router.get('/hiretoretire/employeemanagement',ensureAuthenticated, function(req, res) {
+        res.render('hiretoretire/employeemanagement');
+    });
+    router.post('/hiretoretire/employeemanagement',ensureAuthenticated, function(req,res){
+        var obj = {};
+        console.log(JSON.stringify(req.body.length));
+          let errors = req.validationErrors();
+
+          if(errors){
+            res.render('add_article', {
+              title:'Add Article',
+              errors:errors
+            });
+          } else {
+            for (var i = 0; i < req.body.length; i++) {
+              let result = new Result();
+              result.category = req.body[i].category;
+              result.section = req.body[i].section;
+              result.updated = new Date;
+              result.user = req.user._id;
+              result.question.title = req.body[i].question_title;
+              result.question.weight = req.body[i].question_weight;
+              result.answer = req.body[i].answer_weight;
+              result.save(function(err){
+                  req.flash('success','Results Added');
+              });
+            }
+          }
+    });
+
+    router.get('/hiretoretire/payroll',ensureAuthenticated, function(req, res) {
+        res.render('hiretoretire/payroll');
+    });
+    router.post('/hiretoretire/payroll',ensureAuthenticated, function(req,res){
+        var obj = {};
+        console.log(JSON.stringify(req.body.length));
+          let errors = req.validationErrors();
+
+          if(errors){
+            res.render('add_article', {
+              title:'Add Article',
+              errors:errors
+            });
+          } else {
+            for (var i = 0; i < req.body.length; i++) {
+              let result = new Result();
+              result.category = req.body[i].category;
+              result.section = req.body[i].section;
+              result.updated = new Date;
+              result.user = req.user._id;
+              result.question.title = req.body[i].question_title;
+              result.question.weight = req.body[i].question_weight;
+              result.answer = req.body[i].answer_weight;
+              result.save(function(err){
+                  req.flash('success','Results Added');
+              });
+            }
+          }
+    });
+
+    router.get('/hiretoretire/retire',ensureAuthenticated, function(req, res) {
+        res.render('hiretoretire/retire');
+    });
+    router.post('/hiretoretire/retire',ensureAuthenticated, function(req,res){
+        var obj = {};
+        console.log(JSON.stringify(req.body.length));
+          let errors = req.validationErrors();
+
+          if(errors){
+            res.render('add_article', {
+              title:'Add Article',
+              errors:errors
+            });
+          } else {
+            for (var i = 0; i < req.body.length; i++) {
+              let result = new Result();
+              result.category = req.body[i].category;
+              result.section = req.body[i].section;
+              result.updated = new Date;
+              result.user = req.user._id;
+              result.question.title = req.body[i].question_title;
+              result.question.weight = req.body[i].question_weight;
+              result.answer = req.body[i].answer_weight;
+              result.save(function(err){
+                  req.flash('success','Results Added');
+              });
+            }
+          }
+    });
+
+    router.get('/hiretoretire/category1/data',ensureAuthenticated, function(req, res) {
+        Article.find({'section' : 'Hiring'},function(err,articles){
+            if(err) res.json(err);
+            else{
+                res.send(articles)
+            }
+        });
+    });
+
+    router.get('/hiretoretire/category2/data',ensureAuthenticated, function(req, res) {
+        Article.find({'section' : 'Employee Management'},function(err,articles){
+            if(err) res.json(err);
+            else{
+                res.send(articles)
+            }
+        });
+    });
+    router.get('/hiretoretire/category3/data',ensureAuthenticated, function(req, res) {
+        Article.find({'section' : 'Payroll'},function(err,articles){
+            if(err) res.json(err);
+            else{
+                res.send(articles)
+            }
+        });
+    });
+    router.get('/hiretoretire/category4/data',ensureAuthenticated, function(req, res) {
+        Article.find({'section' : 'Retire'},function(err,articles){
+            if(err) res.json(err);
+            else{
+                res.send(articles)
+            }
+        });
+    });
+
+//HIRETORETIRE_ENDS
 
 
 //USER PART
@@ -437,6 +601,29 @@ router.post('/general', ensureAuthenticated, function(req, res){
         });
 
     });
+
+    router.post('/results/h2r',ensureAuthenticated, function(req, res) {
+        var obj = {};
+        let query = {_id:req.user._id}
+        console.log(req.body.score);
+        User.update(query, {"h2r" : { 
+                                      "hiring" : req.body.hiring,
+                                      "employeemanagement"  : req.body.employeemanagement,
+                                      "payroll" : req.body.payroll,
+                                      "retire" :  req.body.retire,
+                                      "score" : req.body.score
+                                    }
+        } , function(err){
+          if(err){
+            console.log(err);
+            return;
+          } else {
+            req.flash('success', 'User Details Updated');
+          }
+        });
+
+    });
+
     router.get('/results/data',ensureAuthenticated, function(req, res) {
         Result.find({'user' : req.user._id },function(err,results){
             if(err) res.json(err);
@@ -486,6 +673,17 @@ router.post('/general', ensureAuthenticated, function(req, res){
                 res.send(users)
             }
         });
+    });
+    router.get('/results/general/:id',ensureAuthenticated,function(req,res){
+      General.find({'user' : req.params.id},function(err,general){
+            if(err) res.json(err);
+            else{
+                console.log(general);
+                res.render('userdata-general',{
+                  general : general
+                });
+            }
+      });
     });
     router.get('/results/:id',ensureAuthenticated, function(req, res) {
                 res.render('userdata', {

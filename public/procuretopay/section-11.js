@@ -86,18 +86,6 @@ function loadNextQuestion(){
 	}
 	loadQuestion(currentQuestion);
 };
-// function loadPreviousQuestion(){
-// 	if(currentQuestion== 0)
-// 		currentQuestion=0;
-// 	else
-// 		currentQuestion--; 
-// 	loadQuestion(currentQuestion); 
-// 	if(currentQuestion == totQuestions - 1){ 
-// 		nextButton.textContent = 'Submit';
-// 		} else{ 
-// 		  nextButton.textContent = 'Next Question';
-// 		  }; 
-// };
 function submitAnswers(){
     var newData = {
     result: []

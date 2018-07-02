@@ -32,9 +32,9 @@ html(lang='en')
           .left_col.scroll-view
             .navbar.nav_title(style='border: 0;')
               a.site_title(href='/')
-                i.fa.fa-leaf
+                i.fa.fa-money
                 | 
-                | Assessment
+                small Business Processes
             .clearfix
             br
             // sidebar menu
@@ -65,14 +65,16 @@ html(lang='en')
                             a(href='/assessment') Abhi ke liye hai
                       li
                         a
-                          i.fa.fa-pagelines
+                          i.fa.fa-book
                           |  Users Data 
                           span.fa.fa-chevron-down
                         ul.nav.child_menu
                           li
-                            a(href='/assessment/results/users') All Data
+                            a(href='/assessment/results/allusers') All Data
                           li
                             a(href='/assessment/results') Results
+                          li
+                            a(href='/assessment/compare') Compare Data
                       li
                         a(href='/users/logout')
                           i.fa.fa-user
@@ -90,7 +92,7 @@ html(lang='en')
                             a(href='/assessment') Abhi ke liye hai
                       li
                         a(href='/assessment/results')
-                          i.fa.fa-pagelines
+                          i.fa.fa-book
                           |  Results
                       li
                         a(href='/users/logout')

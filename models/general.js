@@ -1,6 +1,9 @@
 const mongoose = require('mongoose');
 // Article Schema
 const GeneralSchema = mongoose.Schema({
+  user:{
+    type: String
+  },
   answer1:{
     type: String,
     required: true

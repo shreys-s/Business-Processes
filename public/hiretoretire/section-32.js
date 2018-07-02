@@ -27,7 +27,7 @@ $(document).ready(function() {
 	});
 });
 function loadQuestion (ArticleIndex) {
-	$.getJSON( 'category3/data', function( data ) {
+	$.getJSON( 'category2/data', function( data ) {
 		nextSection.style.display='none';
 		userListData=data;
 		totQuestions=userListData.length;
@@ -81,7 +81,7 @@ function loadNextQuestion(){
 		container.style.display = 'none';
 		resultCont.style.display = 'block';
 		nextSection.style.display = 'block';
-		resultCont.textContent = 'Cash Application assessment completed | Click Submit to proceed to the Next Section.';
+		resultCont.textContent = 'Employee Management assessment completed | Click Submit to proceed to the Next Section.';
 		return; 
 	}
 	loadQuestion(currentQuestion);
@@ -107,7 +107,7 @@ function submitAnswers(){
     console.log(userListData);
     $.ajax({
     	type: "POST",
-    	url: "http://localhost:3000/assessment/ordertocash/cashapplication",
+    	url: "http://localhost:3000/assessment/hiretoretire/employeemanagement",
     		data: JSON.stringify(newData.result),
     		contentType: 'application/json',
     		success: function(data){

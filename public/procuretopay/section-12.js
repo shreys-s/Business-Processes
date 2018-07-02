@@ -13,18 +13,14 @@ var opt2 = document.getElementById('opt2');
 var opt3 = document.getElementById('opt3');
 var nextSection = document.getElementById('nextSection');
 var nextButton = document.getElementById('nextButton');
-var previousButton = document.getElementById('previousButton');
 var resultCont = document.getElementById('result');
-var c3= document.getElementById('c3');
-
+var radio3= document.getElementById('radio3');
+var c3 = document.getElementById('c3');
 
 $(document).ready(function() {
 	loadQuestion(currentQuestion);
 	$("#nextButton").click(function(event){
               loadNextQuestion();
-            });
-	$("#previousButton").click(function(event){
-              loadPreviousQuestion();
             });
 	$("#nextSection").click(function(event){
 			submitAnswers();
@@ -32,6 +28,7 @@ $(document).ready(function() {
 });
 function loadQuestion (ArticleIndex) {
 	$.getJSON( 'category2/data', function( data ) {
+		nextSection.style.display='none';
 		userListData=data;
 		totQuestions=userListData.length;
 		console.log(totQuestions);
@@ -41,11 +38,12 @@ function loadQuestion (ArticleIndex) {
 		if(userListData[ArticleIndex].choice3.weight == -1)
 		{
 			c3.style.display='none';
+			radio3.style.display='none';
 			opt3.textContent='';
 		}
 		else
 		{
-			c3.style.display='block';
+			radio3.style.display='block';
 			opt3.textContent = userListData[ArticleIndex].choice3.title;
 		}
 	});
@@ -57,59 +55,43 @@ function loadNextQuestion(){
 		return;
 	}
 	var answer = selectedOption.value;
+	selectedOption.checked=false;
 	if(answer == 1){
 		score[currentQuestion]=userListData[currentQuestion].choice1.weight;
 		if(userListData[currentQuestion].choice1.next_id == -1)
-			currentQuestion++;
+			currentQuestion=totQuestions;
 		else
 			currentQuestion=userListData[currentQuestion].choice1.next_id;
 	}
 	if(answer == 2){
 		score[currentQuestion]=userListData[currentQuestion].choice2.weight;
 		if(userListData[currentQuestion].choice2.next_id == -1)
-			currentQuestion++;
+			currentQuestion=totQuestions;
 		else
 			currentQuestion=userListData[currentQuestion].choice2.next_id;
 	}
 	if(answer == 3){
 		score[currentQuestion]=userListData[currentQuestion].choice3.weight;
 		if(userListData[currentQuestion].choice3.next_id == -1)
-			currentQuestion++;
+			currentQuestion=totQuestions;
 		else
 			currentQuestion=userListData[currentQuestion].choice3.next_id;
-	}
-	selectedOption.checked = false;
-	if(currentQuestion == totQuestions - 1){
-		nextButton.textContent = 'Submit';
 	}
 	if(currentQuestion == totQuestions){
 		container.style.display = 'none';
 		resultCont.style.display = 'block';
 		nextSection.style.display = 'block';
-		console.log(score);
-		resultCont.textContent = 'Purchase Section Assessment Complete ' + score[0];
+		resultCont.textContent = 'Vendor Analysis assessment completed | Click Submit to proceed to the Next Section.';
 		return; 
 	}
 	loadQuestion(currentQuestion);
-};
-function loadPreviousQuestion(){
-	if(currentQuestion== 0)
-		currentQuestion=0;
-	else
-		currentQuestion--; 
-	loadQuestion(currentQuestion); 
-	if(currentQuestion == totQuestions - 1){ 
-		nextButton.textContent = 'Submit';
-		} else{ 
-		  nextButton.textContent = 'Next Question';
-		  }; 
 };
 function submitAnswers(){
     var newData = {
     result: []
 	};
 
-	for(var i in score) {    
+	for(var i in userListData) {    
 
 	    var item = userListData[i];   
 
