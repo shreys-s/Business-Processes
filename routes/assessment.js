@@ -76,9 +76,11 @@ router.post('/general', ensureAuthenticated, function(req, res){
 		    });
 		});
 
-
 		router.get('/procuretopay/purchasesection',ensureAuthenticated, function(req, res) {
+      if(req.user.p2p.purchasesection == 0)
 		    res.render('procuretopay/purchasesection');
+      else
+        res.redirect('/assessment/procuretopay')
 		});
     router.post('/procuretopay/purchasesection',ensureAuthenticated, function(req,res){
         var obj = {};
@@ -108,7 +110,10 @@ router.post('/general', ensureAuthenticated, function(req, res){
     });
 
 		router.get('/procuretopay/vendoranalysis',ensureAuthenticated, function(req, res) {
-		    res.render('procuretopay/vendoranalysis');
+      if(req.user.p2p.vendoranalysis == 0)
+        res.render('procuretopay/vendoranalysis');
+      else
+        res.redirect('/assessment/procuretopay')
 		});
     router.post('/procuretopay/vendoranalysis',ensureAuthenticated, function(req,res){
         var obj = {};
@@ -138,8 +143,11 @@ router.post('/general', ensureAuthenticated, function(req, res){
     });
 
 		router.get('/procuretopay/finances',ensureAuthenticated, function(req, res) {
-		    res.render('procuretopay/finances');
-		});
+      if(req.user.p2p.finances == 0)
+        res.render('procuretopay/finances');
+      else
+        res.redirect('/assessment/procuretopay')
+    });
     router.post('/procuretopay/finances',ensureAuthenticated, function(req,res){
         var obj = {};
         console.log(JSON.stringify(req.body.length));
@@ -168,8 +176,11 @@ router.post('/general', ensureAuthenticated, function(req, res){
     });
 
 		router.get('/procuretopay/erpsection',ensureAuthenticated, function(req, res) {
-		    res.render('procuretopay/erpsection');
-		});
+      if(req.user.p2p.erpsection == 0)
+        res.render('procuretopay/erpsection');
+      else
+        res.redirect('/assessment/procuretopay')
+    });
     router.post('/procuretopay/erpsection',ensureAuthenticated, function(req,res){
         var obj = {};
         console.log(JSON.stringify(req.body.length));
@@ -239,7 +250,10 @@ router.post('/general', ensureAuthenticated, function(req, res){
 
 
     router.get('/ordertocash/creditanalysis',ensureAuthenticated, function(req, res) {
+      if(req.user.o2c.creditanalysis == 0)
         res.render('ordertocash/creditanalysis');
+      else
+        res.redirect('/assessment/ordertocash');
     });
     router.post('/ordertocash/creditanalysis',ensureAuthenticated, function(req,res){
         var obj = {};
@@ -269,7 +283,10 @@ router.post('/general', ensureAuthenticated, function(req, res){
     });
 
     router.get('/ordertocash/billing',ensureAuthenticated, function(req, res) {
+       if(req.user.o2c.billing == 0)
         res.render('ordertocash/billing');
+      else
+        res.redirect('/assessment/ordertocash');
     });
     router.post('/ordertocash/billing',ensureAuthenticated, function(req,res){
         var obj = {};
@@ -299,7 +316,10 @@ router.post('/general', ensureAuthenticated, function(req, res){
     });
 
     router.get('/ordertocash/cashapplication',ensureAuthenticated, function(req, res) {
+      if(req.user.o2c.cashapplication == 0)
         res.render('ordertocash/cashapplication');
+      else
+        res.redirect('/assessment/ordertocash');
     });
     router.post('/ordertocash/cashapplication',ensureAuthenticated, function(req,res){
         var obj = {};
@@ -329,7 +349,10 @@ router.post('/general', ensureAuthenticated, function(req, res){
     });
 
     router.get('/ordertocash/glposting',ensureAuthenticated, function(req, res) {
+      if(req.user.o2c.glposting == 0)
         res.render('ordertocash/glposting');
+      else
+        res.redirect('/assessment/ordertocash');
     });
     router.post('/ordertocash/glposting',ensureAuthenticated, function(req,res){
         var obj = {};
@@ -401,7 +424,10 @@ router.post('/general', ensureAuthenticated, function(req, res){
 
 
     router.get('/hiretoretire/hiring',ensureAuthenticated, function(req, res) {
+      if(req.user.h2r.hiring == 0)
         res.render('hiretoretire/hiring');
+      else
+        res.redirect('/assessment/hiretoretire');
     });
     router.post('/hiretoretire/hiring',ensureAuthenticated, function(req,res){
         var obj = {};
@@ -431,7 +457,10 @@ router.post('/general', ensureAuthenticated, function(req, res){
     });
 
     router.get('/hiretoretire/employeemanagement',ensureAuthenticated, function(req, res) {
+      if(req.user.h2r.employeemanagement == 0)
         res.render('hiretoretire/employeemanagement');
+      else
+        res.redirect('/assessment/hiretoretire');
     });
     router.post('/hiretoretire/employeemanagement',ensureAuthenticated, function(req,res){
         var obj = {};
@@ -461,7 +490,10 @@ router.post('/general', ensureAuthenticated, function(req, res){
     });
 
     router.get('/hiretoretire/payroll',ensureAuthenticated, function(req, res) {
+      if(req.user.h2r.payroll == 0)
         res.render('hiretoretire/payroll');
+      else
+        res.redirect('/assessment/hiretoretire');
     });
     router.post('/hiretoretire/payroll',ensureAuthenticated, function(req,res){
         var obj = {};
@@ -491,7 +523,10 @@ router.post('/general', ensureAuthenticated, function(req, res){
     });
 
     router.get('/hiretoretire/retire',ensureAuthenticated, function(req, res) {
+      if(req.user.h2r.retire == 0)
         res.render('hiretoretire/retire');
+      else
+        res.redirect('/assessment/hiretoretire');
     });
     router.post('/hiretoretire/retire',ensureAuthenticated, function(req,res){
         var obj = {};
@@ -558,7 +593,6 @@ router.post('/general', ensureAuthenticated, function(req, res){
 
 
 //USER PART
-
     router.post('/results/p2p',ensureAuthenticated, function(req, res) {
         var obj = {};
         let query = {_id:req.user._id}
@@ -580,6 +614,7 @@ router.post('/general', ensureAuthenticated, function(req, res){
         });
 
     });
+
     router.post('/results/o2c',ensureAuthenticated, function(req, res) {
         var obj = {};
         let query = {_id:req.user._id}

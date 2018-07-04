@@ -1,26 +1,21 @@
 extends layout
 block content
-  script(type='text/javascript' src='/results-p2p.js').
   script(type='text/javascript').
     window.onload = function () {
       $.getJSON('http://localhost:3000/assessment/results/userdata', function(user) {
-        console.log(user);
-        if(user.p2p.purchasesection != 0 ){
-          document.getElementById('button1').className = "btn btn-success btn-block btn-lg";
-          document.getElementById('link1').href = "#";
-          }
-        if(user.p2p.vendoranalysis != 0 ){
-          document.getElementById('button2').className = "btn btn-success btn-block btn-lg";
-          document.getElementById('link2').href = "#";
+      console.log(user);
+      if(user.p2p.purchasesection != 0 ){
+        document.getElementById('button1').className = "btn btn-success btn-block btn-lg";
         }
-        if(user.p2p.finances != 0 ){
-          document.getElementById('button3').className = "btn btn-success btn-block btn-lg";
-          document.getElementById('link3').href = "#";
-        }
-        if(user.p2p.erpsection != 0 ){
-          document.getElementById('button4').className = "btn btn-success btn-block btn-lg";
-          document.getElementById('link4').href = "#";
-        }
+      if(user.p2p.vendoranalysis != 0 ){
+        document.getElementById('button2').className = "btn btn-success btn-block btn-lg";
+      }
+      if(user.p2p.finances != 0 ){
+        document.getElementById('button3').className = "btn btn-success btn-block btn-lg";
+      }
+      if(user.p2p.erpsection != 0 ){
+        document.getElementById('button4').className = "btn btn-success btn-block btn-lg";
+      }
       });
     }
   .clearfix

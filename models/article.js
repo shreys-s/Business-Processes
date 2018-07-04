@@ -16,7 +16,7 @@ const ArticleSchema = mongoose.Schema({
     },
     next_id:
     {
-      type: Number
+      type: String
     },
     weight:
     {
@@ -32,7 +32,7 @@ const ArticleSchema = mongoose.Schema({
     },
     next_id:
     {
-      type: Number
+      type: String
     },
     weight:
     {
@@ -47,7 +47,7 @@ const ArticleSchema = mongoose.Schema({
     },
     next_id:
     {
-      type: Number
+      type: String
     },
     weight:
     {

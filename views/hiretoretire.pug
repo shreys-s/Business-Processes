@@ -1,6 +1,5 @@
 extends layout
 block content
-  script(type='text/javascript' src='/results-h2r.js').
   script(type='text/javascript').
     window.onload = function () {
       $.getJSON('http://localhost:3000/assessment/results/userdata', function(user) {

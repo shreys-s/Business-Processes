@@ -90,7 +90,7 @@ app.get('/', function(req, res){
       console.log(err);
     } else {
       res.render('index', {
-        title:'Business Process kya hota hai?',
+        title:'What is Business Process Maturity Assessment?',
         articles: articles
       });
     }
