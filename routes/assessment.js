@@ -11,10 +11,14 @@ let Result = require('../models/result');
 let General = require('../models/general');
 // Add Route
 router.get('/', ensureAuthenticated, function(req, res){
-    Article.find(function(err, articles) {
-      res.render('assessment', {
-        title: 'Start Assessment',
-      });
+    User.find( req.user._id ,function(err, user) {
+      if(user[0].isGeneral){
+        res.render('assessment', {
+          title: 'Start Assessment',
+        });
+      }
+      else
+        res.redirect('/assessment/general');
     });
 });
 
@@ -57,6 +61,7 @@ router.post('/general', ensureAuthenticated, function(req, res){
     general.answer8 = req.body.answer8;
     general.answer9 = req.body.answer9;
     general.answer10 = req.body.answer10;
+    general.user = req.user._id;
   
     general.save(function(err){
       if(err){
@@ -64,8 +69,17 @@ router.post('/general', ensureAuthenticated, function(req, res){
         return;
       } else {
         req.flash('success','General Questionnaire Completed Successfully!');
-        res.redirect('/assessment');
       }
+    });
+    let query = {_id:req.user._id}
+    User.update(query, { "isGeneral" : true } , function(err){
+          if(err){
+            console.log(err);
+            return;
+          } else {
+            req.flash('success', 'User Details Updated');
+            res.redirect('/assessment');
+          }
     });
   }
 });

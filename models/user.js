@@ -26,6 +26,10 @@ const UserSchema = mongoose.Schema({
   	type: Boolean,
   	default: false
   },
+  isGeneral:{
+    type: Boolean,
+    default: false
+  },
   p2p:{
     purchasesection:{
       type: Number,
