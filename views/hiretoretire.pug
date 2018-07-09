@@ -2,7 +2,7 @@ extends layout
 block content
   script(type='text/javascript').
     window.onload = function () {
-      $.getJSON('http://localhost:3000/assessment/results/userdata', function(user) {
+      $.getJSON('/assessment/results/userdata', function(user) {
         console.log(user);
         if(user.h2r.hiring != 0 ){
           document.getElementById('button1').className = "btn btn-success btn-block btn-lg";

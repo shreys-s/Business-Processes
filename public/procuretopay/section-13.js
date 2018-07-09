@@ -124,7 +124,7 @@ function submitAnswers(){
 	}
     $.ajax({
     	type: "POST",
-    	url: "http://localhost:3000/assessment/procuretopay/finances",
+    	url: "/assessment/procuretopay/finances",
     		data: JSON.stringify(newData.result),
     		contentType: 'application/json',
     		success: function(data){
@@ -133,7 +133,7 @@ function submitAnswers(){
     });
 }
 function updateuserdata(){
-	    $.getJSON('http://localhost:3000/assessment/results/data', function( data ) {
+	    $.getJSON('/assessment/results/data', function( data ) {
         console.log(data);
         for(var i in data) {
             if(data[i].section == "Vendor Analysis")
@@ -180,7 +180,7 @@ function submitAnswerstoUserData(){
     console.log(sendInfo);
     $.ajax({
         type: "POST",
-        url: "http://localhost:3000/assessment/results/p2p",
+        url: "/assessment/results/p2p",
             data: JSON.stringify(sendInfo),
             contentType: 'application/json',
             success: function(data){

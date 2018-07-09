@@ -18,7 +18,7 @@ block content
 							button#nextDataPoint.btn.btn-primary Next Companies
 	script(type="text/javascript").
 		window.onload = function () {
-		$.getJSON('http://localhost:3000/assessment/results/allusers/data', function(allusers) {
+		$.getJSON('/assessment/results/allusers/data', function(allusers) {
 		console.log(allusers);
 		var total=allusers.length;
 		console.log(total);

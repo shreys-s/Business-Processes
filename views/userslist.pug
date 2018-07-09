@@ -4,7 +4,7 @@ block content
     var users=[{"Name": " ", "Company" : " " , "PurchaseSection" : " ", "VendorAnalysis" : " ", "ERPSection" : " ", "Finances" : " ",  "ProcureToPay" : " ","Billing" : " ", "CreditAnalysis" : " ", "CashApplication" : " ", "GLPosting" : " "," OrderToCash": " ", "Hiring" : " ", "EmployeeManagement" : " ", "Payroll" : " ", "Retire" : " ", "HireToRetire" : " " }];
       window.onload = function () {
       $('button').click(function(){
-        $.getJSON('http://localhost:3000/assessment/results/allusers/data', function(data) {
+        $.getJSON('/assessment/results/allusers/data', function(data) {
           for (var i = 0; i < data.length; i++) {
             users[i] = {};
             users[i].Name = data[i].name;

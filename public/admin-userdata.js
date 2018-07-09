@@ -13,7 +13,7 @@ window.onload = function () {
         }
     }
     console.log(user);
-    $.getJSON('http://localhost:3000/assessment/results/allusers/data', function(allusers) {
+    $.getJSON('/assessment/results/allusers/data', function(allusers) {
         console.log(allusers);
         for (var i = 0; i < allusers.length; i++) {
             p2p[0] = p2p[0] + allusers[i].p2p.purchasesection;
