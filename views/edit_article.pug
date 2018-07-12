@@ -56,7 +56,7 @@ block content
         select.form-control(name='nextid1')
           option(value= -1) No Sub Question
           for article,i in articles
-            option(value= i) #{i+1}. #{article.title}
+            option(value= article._id) #{i+1}. #{article.title}
         label Weight of the Choice:
         input.form-control(type='number', name='wchoice1' , placeholder='Weight of Choice 1', value=article.choice1.weight)
       br 
@@ -67,7 +67,7 @@ block content
         select.form-control(name='nextid2')
           option(value= -1) No Sub Question
           for article,i in articles
-            option(value= i) #{i+1}. #{article.title}
+            option(value= article._id) #{i+1}. #{article.title}
         label Weight of the Choice:
         input.form-control(type='number', name='wchoice2' , placeholder='Weight of Choice 2', value=article.choice2.weight)
       br 
@@ -78,7 +78,7 @@ block content
         select.form-control(name='nextid3')
           option(value= -1) No Sub Question
           for article,i in articles
-            option(value= i) #{i+1}. #{article.title}
+            option(value= article._id) #{i+1}. #{article.title}
         label Weight of the Choice:
         input.form-control(type='number', name='wchoice3' , placeholder='Weight of Choice 3', value=article.choice3.weight)
       br

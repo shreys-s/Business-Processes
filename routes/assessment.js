@@ -610,7 +610,6 @@ router.post('/general', ensureAuthenticated, function(req, res){
     router.post('/results/p2p',ensureAuthenticated, function(req, res) {
         var obj = {};
         let query = {_id:req.user._id}
-        console.log(req.body.score);
         User.update(query, {"p2p" : { 
                                       "purchasesection" : req.body.purchasesection,
                                       "vendoranalysis"  : req.body.vendoranalysis,
@@ -623,7 +622,7 @@ router.post('/general', ensureAuthenticated, function(req, res){
             console.log(err);
             return;
           } else {
-            req.flash('success', 'User Details Updated');
+            console.log(req.body);
           }
         });
 
